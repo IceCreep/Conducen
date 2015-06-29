@@ -1,4 +1,12 @@
 {
   "name": "Conducen",
-  "app_id": ""
+  "app_id": "bc67f194",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
