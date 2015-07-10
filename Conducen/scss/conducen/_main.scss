@@ -1,20 +1,37 @@
 //Common
-.main-bg{
-	background: white url("../img/main-bg.png") no-repeat 0 0;
-	background-size: 100% 100%;
+.clearfix{
+	clear: both;
+}
+
+.main-arcs{
+	img{
+		width: 100%;
+	}
+}
+
+img{
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: "RobotoCondensedBold", Verdana, Arial;
+	font-size: 20px;
 }
 
 //Home
 .home{
-	min-height: 640px;
+	// min-height: 640px;
 
 	.logo-container{
 		margin: 0 auto;
 		padding-top: 60px;
+		width: 100%;
 
 		.gn-logo{
-			margin-right: 4%;
-			width: 18%;
+			margin-right: 3.5%;
+			margin-left: 12.5%;
+			width: 13%;
+			float: left;
 
 			img{
 				max-width: 169px;
@@ -23,10 +40,63 @@
 		}
 
 		.gn-logo-name{
-			width: 78%;
+			width: 58%;
+			float: left;
 
 			img{
 				width: 100%;
+			}
+		}
+	}
+
+	.our-brands{
+		width: 100%;
+
+		img{
+			width: 100%;
+		}
+	}
+
+	.main-buttons{
+		padding: 0;
+
+		.button{
+			float: left;
+			width: 33%;
+			box-shadow: 0px 0px 10px -1px green inset;
+			border: 1px solid black;
+			margin: 0;
+
+			&.ampacity{
+				// background: url("../img/home/button-ampacity.png");
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			&.voltage-drop{
+				// background: url("../img/home/button-voltage-drop.png");
+				background-size: 100%;	
+				background-repeat: no-repeat;
+			}
+
+			&.conduit{
+				// background: url("../img/home/button-conduit.png");
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			img{
+				width: 50%;
+				margin: 0 auto;
+				margin-top: 12%;
+			}
+
+			h2{
+				text-transform: uppercase;
+				font-size: 13px;
+				font-weight: bold;
+				margin-top: 15px;
+				margin-bottom: 6px;
 			}
 		}
 	}
