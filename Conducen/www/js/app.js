@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers'])
+angular.module('app', ['ionic', 'translate', 'app.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,6 +16,15 @@ angular.module('app', ['ionic', 'app.controllers'])
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+    if(typeof navigator.globalization !== "undefined") {
+      navigator.globalization.getPreferredLanguage(function(language) {
+          $translate.use((language.value).split("-")[0]).then(function(data) {
+              console.log("SUCCESS -> " + data);
+          }, function(error) {
+              console.log("ERROR -> " + error);
+          });
+      }, null);
     }
   });
 })
