@@ -1,0 +1,155 @@
+//Common
+.clearfix{
+	clear: both;
+}
+
+.scroll{
+	min-height: 100%;
+}
+
+.bottom{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.top{
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.green{
+	color: #139f58;
+}
+
+.green-bg{
+	background-color: #139f58;
+}
+
+.main-arcs{
+	img{
+		width: 100%;
+	}
+}
+
+img{
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: "RobotoCondensedBold", Verdana, Arial;
+	font-size: 20px;
+}
+
+p{
+	font-family: "RobotoCondensedRegular", Verdana, Arial;
+	font-size: 14px;
+
+	b{
+		font-family: "RobotoCondensedBold", Verdana, Arial;
+	}
+}
+
+img{
+	width: 100%;
+}
+
+secondary-menu{
+	width: 100%;
+	display: block;
+	position: absolute;
+	min-height: 35px;
+}
+
+//Menu at the top
+.toggle-menu{
+
+	position: absolute;
+	width: 100%;
+	margin-top: 10px;
+	min-height: 35px;
+
+	.menu-container{
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+
+		h3{
+			font-size: 16px;
+			color: #c9c9c9;
+			text-transform: uppercase;
+			font-family: "RobotoCondensedRegular", Verdana, Arial;
+			float: right;
+			margin: 3% 0 0 0;
+		}
+
+		a{
+			float: right;
+			width: 10%;
+			margin-left: 5px;
+			margin-right: 20px;
+
+			img{
+				width: 100%;
+			}
+		}
+
+		.options{
+			position: absolute;
+			width: 100%;
+			text-align: right;
+			padding-right: 20px;
+			height: 100%;
+			z-index: 3;
+
+			li{
+				float: right;
+				background-color: white;
+				width: 60%;
+				text-align: left;
+				border: 1px solid #139f58;
+				height: 100%;
+				min-height: 50px;
+				padding-left: 20px;
+
+				a{
+					width: 70%;
+					color: #666666;
+					text-decoration: none;
+					font-size: 16px;
+					float: left;
+					line-height: 50px;
+				}
+
+				span{
+					float: left;
+					margin-top: 16px;
+					font-size: 20px;
+				}
+
+				&.active{
+					background-color: #139f58;
+					
+					a{
+						color: white;
+					}
+
+					span{
+						color: white;
+					}
+				}
+			}
+		}
+
+		.menu-bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			z-index: 2;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['pascalprecht.translate'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   

@@ -7683,7 +7683,13 @@ a.button {
 
 .bottom {
   position: absolute;
-  bottom: 0; }
+  bottom: 0;
+  width: 100%; }
+
+.top {
+  position: absolute;
+  top: 0;
+  width: 100%; }
 
 .green {
   color: #139f58; }
@@ -7702,62 +7708,87 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 20px; }
 
 p {
-  font-family: "RobotoCondensedBold", Verdana, Arial;
+  font-family: "RobotoCondensedRegular", Verdana, Arial;
   font-size: 14px; }
+  p b {
+    font-family: "RobotoCondensedBold", Verdana, Arial; }
 
 img {
   width: 100%; }
 
-.home {
-  min-height: 100%; }
-  .home .language-menu {
-    position: relative;
-    width: 100%;
-    margin-top: 10px; }
-    .home .language-menu .container {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%; }
-    .home .language-menu h3 {
+secondary-menu {
+  width: 100%;
+  display: block;
+  position: absolute;
+  min-height: 35px; }
+
+.toggle-menu {
+  position: absolute;
+  width: 100%;
+  margin-top: 10px;
+  min-height: 35px; }
+  .toggle-menu .menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%; }
+    .toggle-menu .menu-container h3 {
       font-size: 16px;
       color: #c9c9c9;
       text-transform: uppercase;
       font-family: "RobotoCondensedRegular", Verdana, Arial;
       float: right;
       margin: 3% 0 0 0; }
-    .home .language-menu a {
+    .toggle-menu .menu-container a {
       float: right;
       width: 10%;
       margin-left: 5px;
       margin-right: 20px; }
-      .home .language-menu a img {
+      .toggle-menu .menu-container a img {
         width: 100%; }
-    .home .language-menu .options {
+    .toggle-menu .menu-container .options {
       position: absolute;
       width: 100%;
       text-align: right;
       padding-right: 20px;
-      height: 100%; }
-      .home .language-menu .options li {
+      height: 100%;
+      z-index: 3; }
+      .toggle-menu .menu-container .options li {
         float: right;
         background-color: white;
         width: 60%;
         text-align: left;
         border: 1px solid #139f58;
         height: 100%;
+        min-height: 50px;
         padding-left: 20px; }
-        .home .language-menu .options li a {
+        .toggle-menu .menu-container .options li a {
           width: 70%;
           color: #666666;
           text-decoration: none;
           font-size: 16px;
           float: left;
           line-height: 50px; }
-        .home .language-menu .options li span {
+        .toggle-menu .menu-container .options li span {
           float: left;
           margin-top: 16px;
           font-size: 20px; }
+        .toggle-menu .menu-container .options li.active {
+          background-color: #139f58; }
+          .toggle-menu .menu-container .options li.active a {
+            color: white; }
+          .toggle-menu .menu-container .options li.active span {
+            color: white; }
+    .toggle-menu .menu-container .menu-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 2; }
+
+.home {
+  min-height: 100%; }
   .home .logo-container {
     margin: 0 auto;
     padding-top: 60px;
@@ -7780,12 +7811,12 @@ img {
     .home .our-brands img {
       width: 100%; }
   .home .main-buttons {
-    padding: 0; }
+    padding: 0;
+    background-color: #666666; }
     .home .main-buttons .button {
       float: left;
-      width: 33%;
-      box-shadow: 0px 0px 10px -1px green inset;
-      border: 1px solid black;
+      box-shadow: 0px 0px 22px -7px #065733 inset;
+      border: 1px solid #666666;
       margin: 0; }
       .home .main-buttons .button.ampacity {
         background-size: 100%;
@@ -7814,5 +7845,25 @@ img {
     .home .copyright p {
       color: white;
       text-align: center;
-      font-weight: bold;
       margin-bottom: 0; }
+
+.secondary-page .header {
+  width: 100%;
+  margin-left: 20px;
+  padding-top: 10px; }
+  .secondary-page .header img {
+    width: 25%;
+    float: left; }
+  .secondary-page .header h1 {
+    float: left;
+    width: 75%;
+    font-size: 20px;
+    line-height: 16px;
+    margin-top: 10%; }
+    .secondary-page .header h1 span {
+      font-size: 14px;
+      color: #009e49;
+      text-transform: uppercase; }
+.secondary-page .curves {
+  top: 9%;
+  z-index: -1; }

@@ -1,25 +1,7 @@
-<ion-view view-title="Home" ng-controller="HomeCtrl as homeCtrl">
-  <ion-content>
+<ion-view view-title="Home" ng-controller="HomeCtrl as homeCtrl" nav-direction="forward">
+  <ion-pane>
   	<div class="home">
-  		<div class="language-menu">
-  			<div class="container">
-	  			<a href="#" ng-click="homeCtrl.toggleLanguageMenu()">
-	  				<img ng-src="img/home/language-btn.png"/>
-	  			</a>
-	  			<h3>{{"choose_language_label" | translate}}</h3>
-	  			<div class="clearfix"></div>
-	  			<ul class="options" ng-show="homeCtrl.showMenu">
-	  				<li ng-click="homeCtrl.selectLanguage('en')">
-	  					<span class="ion-arrow-right-b green"></span>
-	  					<a href="#">English</a>
-	  				</li>
-	  				<li ng-click="homeCtrl.selectLanguage('es')">
-	  					<span class="ion-arrow-right-b green"></span>
-	  					<a href="#">Español</a>
-	  				</li>
-	  			</ul>
-  			</div>
-  		</div>
+  		<language-menu></language-menu>
 	  	<div class="logo-container">
 			<div class="gn-logo">
 	  			<img class="" ng-src="img/gn-logo.png"/>
@@ -37,23 +19,23 @@
 	  			<img ng-src="img/home/{{'our_brands_image' | translate}}" />
 	  		</div>
 	  		<div class="main-buttons row">
-	  			<button class="button button-full ampacity col col-33">
+	  			<button class="button button-full ampacity col col-33" ui-sref="ampacity">
 				  <img ng-src="img/home/logo-ampacity.png" />
 				  <h2>{{"ampacity_label" | translate}}</h2>
 				</button>
-				<button class="button button-full voltage-drop col col-33">
+				<button class="button button-full voltage-drop col col-33" ui-sref="voltage-drop">
 				  <img ng-src="img/home/logo-voltage-drop.png" />
 				  <h2>{{"voltage_drop_label" | translate}}</h2>
 				</button>
-				<button class="button button-full conduit col col-33">
+				<button class="button button-full conduit col col-33" ui-sref="conduit">
 				  <img ng-src="img/home/logo-conduit.png" />
 				  <h2>{{"conduit_fill_label" | translate}}</h2>
 				</button>
 	  		</div>
 	  		<div class="copyright green-bg">
-	  			<p>{{"copyright_label" | translate}}</p>
+	  			<p><b>&copy; General Cable. </b>{{"copyright_label" | translate}}</p>
 	  		</div>
 	  	</div>
   	</div>
-  </ion-content>
+  </ion-pane>
 </ion-view>

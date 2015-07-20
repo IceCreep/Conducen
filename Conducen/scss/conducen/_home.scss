@@ -1,0 +1,93 @@
+//Home
+.home{
+	min-height: 100%;
+
+	.logo-container{
+		margin: 0 auto;
+		padding-top: 60px;
+		width: 100%;
+
+		.gn-logo{
+			margin-right: 3.5%;
+			margin-left: 12.5%;
+			width: 13%;
+			float: left;
+
+			img{
+				max-width: 169px;
+				width: 100%;
+			}
+		}
+
+		.gn-logo-name{
+			width: 58%;
+			float: left;
+
+			img{
+				width: 100%;
+			}
+		}
+	}
+
+	.our-brands{
+		width: 100%;
+
+		img{
+			width: 100%;
+		}
+	}
+
+	.main-buttons{
+		padding: 0;
+		background-color: #666666;
+
+		.button{
+			float: left;
+			box-shadow: 0px 0px 22px -7px #065733 inset;
+			border: 1px solid #666666;
+			margin: 0;
+
+			&.ampacity{
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			&.voltage-drop{
+				background-size: 100%;	
+				background-repeat: no-repeat;
+			}
+
+			&.conduit{
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			img{
+				width: 50%;
+				margin: 0 auto;
+				margin-top: 12%;
+			}
+
+			h2{
+				text-transform: uppercase;
+				font-size: 13px;
+				font-weight: bold;
+				margin-top: 15px;
+				margin-bottom: 6px;
+			}
+		}
+	}
+
+	.copyright{
+		display: block;
+		height: 45px;
+		vertical-align: middle;
+		line-height: 45px;
+
+		p{
+			color: white;
+			text-align: center;
+			margin-bottom: 0;
+		}
+	}
+}

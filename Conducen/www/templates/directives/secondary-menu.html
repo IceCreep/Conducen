@@ -1,0 +1,29 @@
+<div class="toggle-menu">
+	<div class="menu-container">
+		<a href="#" ng-click="toggleMenu()">
+			<img ng-src="img/common/secondary-menu-btn.png"/>
+		</a>
+		<h3>{{"menu_label" | translate}}</h3>
+		<div class="clearfix"></div>
+		<ul class="options animate slide-down" ng-show="showMenu">
+			<li ui-sref="home" ng-click="showMenu" ng-class="isActive('home')">
+				<span class="ion-arrow-right-b green"></span>
+				<a href="#">{{"home_label" | translate}}</a>
+			</li>
+			<li ui-sref="ampacity" ng-click="showMenu" ng-class="isActive('ampacity')">
+				<span class="ion-arrow-right-b green"></span>
+				<a href="#">{{"ampacity_label" | translate}}</a>
+			</li>
+			<li ui-sref="voltage-drop" ng-click="showMenu" ng-class="isActive('voltage-drop')">
+				<span class="ion-arrow-right-b green"></span>
+				<a href="#">{{"voltage_drop_label" | translate}}</a>
+			</li>
+			<li ui-sref="conduit" ng-click="showMenu" ng-class="isActive('conduit')">
+				<span class="ion-arrow-right-b green"></span>
+				<a href="#">{{"conduit_fill_label" | translate}}</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+		<div class="menu-bg" ng-show="showMenu" ng-click="toggleMenu()"></div>
+	</div>
+</div>

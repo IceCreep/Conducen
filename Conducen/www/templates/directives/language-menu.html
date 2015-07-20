@@ -1,0 +1,16 @@
+<div class="toggle-menu">
+	<div class="menu-container">
+		<a href="#" ng-click="toggleLanguageMenu()">
+			<img ng-src="img/home/language-btn.png"/>
+		</a>
+		<h3>{{"choose_language_label" | translate}}</h3>
+		<div class="clearfix"></div>
+		<ul class="options nga-default" ng-show="showMenu" ng-class="animationClass">
+			<li ng-repeat="language in languageMenuOptions" ng-click="selectLanguage(language.key)" ng-class="isActive(language.key)">
+				<span class="ion-arrow-right-b green"></span>
+				<a href="#">{{language.name}}</a>
+			</li>
+		</ul>
+		<div class="menu-bg" ng-show="showMenu" ng-click="toggleLanguageMenu()"></div>
+	</div>
+</div>

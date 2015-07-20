@@ -1,19 +1,7 @@
-angular.module('app.controllers', ['pascalprecht.translate'])
+angular.module('app')
 
-.controller('HomeCtrl', function($scope, $translate) {
+.controller('HomeCtrl', function($scope) {
 
-    this.showMenu = false;
     
-    this.toggleLanguageMenu = function(){
-      if(this.showMenu == false){
-        this.showMenu = true;
-      }else{
-        this.showMenu = false;
-      }
-    };
-
-    this.selectLanguage = function(language){
-      $translate.use(language);
-    }
 });
 
