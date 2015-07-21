@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('languageMenu', function() {
+.directive('languageMenu', ['utils', function(utils) {
   return {
     restrict: "E",
     scope: {
@@ -36,6 +36,7 @@ angular.module('app')
 
       $scope.selectLanguage = function(language){
         $translate.use(language);
+        // $scope.showMenu = false;
       };
 
       $scope.isActive = function(language){
@@ -47,6 +48,12 @@ angular.module('app')
     templateUrl: 'templates/directives/language-menu.html',
     link: function(scope, element, attrs) {
       //Init code goes here
+
+      utils.initVH();
+
+      $('.menu-bg').css({
+          height: utils.vh(100)
+      });
     }
   };
-});
+}]);

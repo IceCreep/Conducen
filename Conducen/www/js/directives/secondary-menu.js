@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('secondaryMenu', function() {
+.directive('secondaryMenu', ['utils', function(utils) {
   return {
     restrict: "E",
     scope: {
@@ -32,6 +32,12 @@ angular.module('app')
     templateUrl: 'templates/directives/secondary-menu.html',
     link: function(scope, element, attrs) {
       //Init code goes here
+
+      utils.initVH();
+
+      $('.menu-bg').css({
+          height: utils.vh(100)
+      });
     }
   };
-});
+}]);
