@@ -7787,6 +7787,19 @@ secondary-menu {
       height: 100vh;
       z-index: 2; }
 
+form {
+  margin: 19% auto;
+  width: 90%; }
+  form .form-item {
+    margin-top: 15px; }
+    form .form-item p {
+      color: #6d6e76; }
+    form .form-item .item {
+      border-color: #009e49; }
+    form .form-item .input-label {
+      color: #ababab;
+      font-size: 14px; }
+
 .home {
   min-height: 100%; }
   .home .logo-container {

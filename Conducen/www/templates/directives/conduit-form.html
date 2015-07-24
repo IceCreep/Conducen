@@ -1,0 +1,34 @@
+<form>
+	<list>
+		<div class="form-item">
+			<p>1. The number of conductor of this type in the conduit</p>
+			<label class="item item-input">
+			    <input type="text" placeholder="Conductors"></input>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>2. Select the size of the conductor in the run.</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      Conductor Size
+			    </div>
+			    <select>
+			      <option ng-repeat="size in wireSizes">{{size}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>3. Selec the insulation type given on the outer jack of the conductor.</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      Insulation Type
+			    </div>
+			    <select>
+			      <option ng-repeat="type in insulationTypes" value="{{type.group}}">{{type.type}}</option>
+			    </select>
+			 </label>
+		</div>
+	</list>
+	<div class="clearfix"></div>
+	
+</form>

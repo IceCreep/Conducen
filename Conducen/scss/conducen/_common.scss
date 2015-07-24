@@ -153,3 +153,25 @@ secondary-menu{
 		}
 	}
 }
+
+form{
+	margin: 19% auto;
+	width: 90%;
+
+	.form-item{
+		margin-top: 15px;
+
+		p{
+			color: #6d6e76;
+		}
+
+		.item{
+			border-color: #009e49;
+		}
+
+		.input-label{
+			color: #ababab;
+			font-size: 14px;
+		}
+	}
+}
