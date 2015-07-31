@@ -44,6 +44,12 @@ angular.module('app', ['ionic', 'translate', 'app.controllers', 'ngAnimate'])
     controller: 'ConduitCtrl'
   })
 
+  .state('results', {
+    url: "/results",
+    templateUrl: "templates/results.html",
+    controller: 'ResultsCtrl'
+  })
+
   .state('ampacity', {
     url: "/ampacity",
     templateUrl: "templates/ampacity-main.html",

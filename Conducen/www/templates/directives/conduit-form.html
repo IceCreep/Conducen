@@ -1,32 +1,72 @@
 <form>
 	<list>
-		<div class="form-item">
-			<p>1. The number of conductor of this type in the conduit</p>
-			<label class="item item-input">
-			    <input type="text" placeholder="Conductors"></input>
-			 </label>
+		<div class="conductors-container" ng-show="conductors.length">
+			<h3>{{"conductors_label" | translate}}</h3>
+			<div class="conductor" ng-repeat="conductor in conductors">
+				<p>{{"wires_label" | translate}}: {{conductor.wires}}, {{"size_label" | translate}}: {{conductor.size}}, {{"insulation_label" | translate}}: {{conductor.insulation}}</p>
+				<span class="icon ion-ios-close" ng-click="removeConductor(conductor)"></span>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+			<h4>{{"total_area_label" | translate}}: {{currentArea}} {{"area_units" | translate}}<sup>2</sup></h4>
 		</div>
 		<div class="form-item">
-			<p>2. Select the size of the conductor in the run.</p>
+			<p>1. {{"conduit_instruction_1" | translate}}</p>
+		</div>
+		<fieldset>
+			<div class="form-item">
+				<p>A. {{"conduit_instruction_A" | translate}}</p>
+				<label class="item item-input">
+				    <input type="text" placeholder="{{'conductors_label' | translate}}" ng-model="currentConductor.wires"></input>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p>B. {{"conduit_instruction_B" | translate}}</p>
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      {{"conductor_size_label" | translate}}
+				    </div>
+				    <select ng-model="currentConductor.size">
+				      <option ng-repeat="size in wireSizes">{{size}}</option>
+				    </select>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p>C. {{"conduit_instruction_C" | translate}}</p>
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      {{"insulation_type_label" | translate}}
+				    </div>
+				    <select ng-model="currentConductor.insulation">
+				      <option ng-repeat="type in insulationTypes" value="{{type.group}}">{{type.type}}</option>
+				    </select>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p>D. {{"conduit_instruction_D" | translate}}</p>
+				<button class="green-bg full-width" ng-click="addConductor(currentConductor)">
+					<span class="icon ion-plus-round"></span>
+					<span class="label">{{"add_label" | translate}}</span>
+				</button>
+			</div>
+		</fieldset>
+		<div class="form-item">
+			<p>2. {{"conduit_instruction_2" | translate}}</p>
 			<label class="item item-input item-select">
 			    <div class="input-label">
-			      Conductor Size
+			      {{"conduit_type_label" | translate}}
 			    </div>
-			    <select>
-			      <option ng-repeat="size in wireSizes">{{size}}</option>
+			    <select ng-model="currentConductorType">
+			      <option ng-repeat="type in conduitTypes" value="{{type.type}}">{{type.name}}</option>
 			    </select>
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>3. Selec the insulation type given on the outer jack of the conductor.</p>
-			<label class="item item-input item-select">
-			    <div class="input-label">
-			      Insulation Type
-			    </div>
-			    <select>
-			      <option ng-repeat="type in insulationTypes" value="{{type.group}}">{{type.type}}</option>
-			    </select>
-			 </label>
+			<p>3. {{"conduit_instruction_3" | translate}}</p>
+			<button class="green-bg full-width" ng-click="calculate()">
+				<span class="icon ion-ios-calculator"></span>
+				<span class="label">{{"calculate_label" | translate}}</span>
+			</button>
 		</div>
 	</list>
 	<div class="clearfix"></div>

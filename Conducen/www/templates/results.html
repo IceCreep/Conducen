@@ -1,0 +1,50 @@
+<ion-view view-title="Results" ng-controller="ResultsCtrl as resultsCtrl" nav-direction="forward">
+  <ion-content>
+  	<div class="secondary-page">
+  		<secondary-menu></secondary-menu>
+	  	<div class="header">
+	  		<img ng-src="img/secondary/logo-conduit.png"/>
+	  		<h1>{{"conduit_fill_label" | translate}}<br/><span>{{"calculator_label" | translate}}</span></h1>
+	  		<div class="clearfix"></div>
+	  	</div>
+  		<div class="curves top">
+  			<img ng-src="img/common/curves-simple.png" />
+  		</div>
+      <div class="results conduit-results">
+        <div class="input-data">
+          <h3>{{"input_values_label" | translate}}:</h3>
+          <p class="top-label">{{"conduit_type_label" | translate}}: {{conduitData.conductorType}}</p>
+          <div class="data-container">
+            <div class="item" ng-repeat="conductor in conduitData.conductors">
+              <h6 class="item-label">{{"wires_label" | translate}}</h6>
+              <h6 class="item-label">{{"size_label" | translate}}</h6>
+              <h6 class="item-label">{{"insulation_label" | translate}}</h6>
+              <p class="item-data">{{conductor.wires | translate}}</p>
+              <p class="item-data">{{conductor.size | translate}}</p>
+              <p class="item-data">{{conductor.insulationType | translate}}</p>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+        <div class="results-data">
+          <h3>{{"conduit_fill_results" | translate}}:</h3>
+          <div class="item">
+            <h6 class="item-label">{{"metric_designator_label" | translate}}</h6>
+            <p class="item-data">{{conduitResult.designator}}</p>
+          </div>
+          <div class="item">
+            <h6 class="item-label">{{"trade_size_label" | translate}}</h6>
+            <p class="item-data">{{conduitResult.trade}}</p>
+          </div>
+        </div>
+        <button class="green-bg full-width" ng-click="goBack()">
+          <span class="icon back"><img ng-src="img/common/icon_back_btn.png"/></span>
+          <span class="label">{{"back_label" | translate}}</span>
+        </button>
+      </div>
+  		<div class="bottom arcs">
+	  		<img ng-src="img/secondary/footer.png" />
+	  	</div>
+  	</div>
+  </ion-content>
+</ion-view>

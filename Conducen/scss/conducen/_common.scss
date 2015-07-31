@@ -11,6 +11,11 @@
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+
+	&.arcs{
+		z-index: -1;
+		position: relative;
+	}
 }
 
 .top{
@@ -53,6 +58,40 @@ p{
 
 img{
 	width: 100%;
+}
+
+button{
+	padding: 0;
+	border: none;
+
+	&.full-width{
+		width: 100%;
+	}
+
+	.icon{
+		padding: 10px 15px;
+    	display: inline-block;
+    	background-color: #004522;
+    	color: white;
+    	float: left;
+
+    	img{
+    		width: 40%;
+    		margin: 0 auto;
+    	}
+
+    	&.back{
+    		padding: 14px 5px;
+    	}
+	}
+
+	.label{
+		padding: 10px 25px;
+		color: white;
+		font-family: "RobotoBold", Verdana, Arial;
+		text-transform: uppercase;
+		line-height: 38px;
+	}
 }
 
 secondary-menu{
@@ -155,8 +194,12 @@ secondary-menu{
 }
 
 form{
-	margin: 19% auto;
+	margin: 19% auto 5%;
 	width: 90%;
+
+	fieldset{
+		border-color: #f0f0f0;
+	}
 
 	.form-item{
 		margin-top: 15px;
@@ -173,5 +216,36 @@ form{
 			color: #ababab;
 			font-size: 14px;
 		}
+	}
+
+	.conductors-container{
+		color: #6d6e76;
+
+		h3, h4{
+			color: #6d6e76;
+		}
+
+		.conductor{
+			border-bottom: 1px solid #009e49;
+
+			p{
+				float: left;
+				width: 95%;
+				margin-bottom: 0px;
+				margin-top: 10px;
+			}
+
+			span{
+				float: left;
+				font-size: 16px;
+				color: #004522;
+				padding-top: 10px;
+			}
+		}
+	}
+
+	.ion-ios-calculator{
+		font-size: 18px;
+		padding: 7px 15px;
 	}
 }

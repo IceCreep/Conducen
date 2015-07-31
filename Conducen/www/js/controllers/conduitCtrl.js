@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('ConduitCtrl', function($scope, $translate) {
+.controller('ConduitCtrl', function($scope) {
 
     
 });
