@@ -28,11 +28,21 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             conduit_instruction_3: "Press the calculate button to get your results",
             conduit_type_label: "Conduit Type",
             calculate_label: "Calculate",
-            input_values_label: "Input Values:",
+            input_values_label: "Input Values",
             conduit_fill_results: "Conduit Fill Results",
             metric_designator_label: "Metric Designator",
             trade_size_label: "Trade Size",
-            back_label: "Back"
+            back_label: "Back",
+            voltage_drop_instruction_1: "Please select the type of material the conductors are made of",
+            voltage_drop_instruction_2: "Please select the material of the conduit",
+            voltage_drop_instruction_3: "Is the conductor run single phase or three phase?",
+            voltage_drop_instruction_4: "The voltage at the source of the circuit. Typical source voltages are: 120, 240, 208, 277 and 480.",
+            voltage_drop_instruction_5: "Please enter the power factor to use on the calculations",
+            conductor_material_label: "Conductor Material",
+            conduit_material_label: "Conductor Material",
+            phase_label: "Phase",
+            voltage_label: "Voltage",
+            power_factor_label: "Power Factor"
         });
         $translateProvider.translations('es', {
             choose_language_label: "Elige el lenguaje",
@@ -63,11 +73,21 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             conduit_instruction_3: "Presione el botón de 'Calcular' para ver los resultados",
             conduit_type_label: "Tipo de Conduit",
             calculate_label: "Calcular",
-            input_values_label: "Valores de Entrada:",
+            input_values_label: "Valores de Entrada",
             conduit_fill_results: "Resultados del cálculo de Conduit",
             metric_designator_label: "Designador Métrico",
             trade_size_label: "Tamaño de Nipple",
-            back_label: "Atrás"
+            back_label: "Atrás",
+            voltage_drop_instruction_1: "Por favor selecione el material con el que está construirdo el conductor.",
+            voltage_drop_instruction_2: "The number of conductor of this type in the voltage_drop.",
+            voltage_drop_instruction_3: "Es el conductor monofásico o trifásico?",
+            voltage_drop_instruction_4: "El voltage de la fuente del circuito. Valores tipicos de voltage son: 120, 240, 208, 277 y 480.",
+            voltage_drop_instruction_5: "Por favor introduzca el factor de potencia a usar en el cálculo",
+            conductor_material_label: "Material de Conductor",
+            conduit_material_label: "Material del Conduit",
+            phase_label: "Fase",
+            voltage_label: "Voltaje",
+            power_factor_label: "Factor de Potencia"
         });
         $translateProvider.preferredLanguage("en");
         $translateProvider.fallbackLanguage("en");

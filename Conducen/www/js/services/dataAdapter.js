@@ -12,7 +12,7 @@ angular.module('app')
 	    	for (var i = 0; i < table5A.data.length; i++) {
 	    		var item = table5A.data[i];
 	    		
-	    		if(item.size == conductor.size && item.group == conductor.insulation){
+	    		if(item.size == conductor.size && item.group == conductor.insulationGroup){
 	    			mm = item.mm;
 	    			inches = item.in;
 	    		}

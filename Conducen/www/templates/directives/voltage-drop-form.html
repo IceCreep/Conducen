@@ -1,0 +1,50 @@
+<form>
+	<list>
+		<div class="form-item">
+			<p>1. {{"voltage_drop_instruction_1" | translate}}</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"conductor_material_label" | translate}}
+			    </div>
+			    <select ng-model="conductorMaterial">
+			      <option ng-repeat="material in conductorMaterials" value="{{material.id}}">{{material.name}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>2. {{"voltage_drop_instruction_2" | translate}}</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"conduit_material_label" | translate}}
+			    </div>
+			    <select ng-model="conduitMaterial">
+			      <option ng-repeat="material in conduitMaterials" value="{{material.id}}">{{material.name}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>3. {{"voltage_drop_instruction_3" | translate}}</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"phase_label" | translate}}
+			    </div>
+			    <select ng-model="phase">
+			      <option ng-repeat="phase in phases" value="{{phase.id}}">{{phase.name}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>4. {{"voltage_drop_instruction_4" | translate}}</p>
+			<label class="item item-input">
+			    <input type="text" placeholder="{{'voltage_label' | translate}}" ng-model="voltage"></input>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>5. {{"voltage_drop_instruction_5" | translate}}</p>
+			<label class="item item-input">
+			    <input type="text" placeholder="{{'power_factor_label' | translate}}" ng-model="powerFactor"></input>
+			 </label>
+		</div>
+	</list>
+	<div class="clearfix"></div>
+</form>

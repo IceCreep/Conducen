@@ -1,5 +1,5 @@
 <ion-view view-title="VoltageDrop" ng-controller="VoltageDropCtrl as voltageDropCtrl" nav-direction="forward">
-  <ion-pane>
+  <ion-content>
   	<div class="secondary-page">
   		<secondary-menu></secondary-menu>
 	  	<div class="header">
@@ -10,9 +10,10 @@
   		<div class="curves top">
   			<img ng-src="img/common/curves-simple.png" />
   		</div>
-  		<div class="bottom">
+      <voltage-drop-form></voltage-drop-form>
+  		<div class="bottom arcs">
 	  		<img ng-src="img/secondary/footer.png" />
 	  	</div>
   	</div>
-  </ion-pane>
+  </ion-content>
 </ion-view>

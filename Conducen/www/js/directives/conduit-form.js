@@ -125,7 +125,7 @@ angular.module('app')
           wires: null,
           size: null,
           insulation: null,
-          insulationType: null
+          insulationGroup: null
         };
       };
 
@@ -144,7 +144,7 @@ angular.module('app')
         newConductor.wires = item.wires;
         newConductor.size = item.size;
         newConductor.insulation = item.insulation;
-        newConductor.insulationType = $scope.getConduitInsulationName(item.insulation);
+        newConductor.insulationGroup = $scope.getConduitInsulationGroup(item.insulation);
 
         $scope.conductors.push(newConductor);
 
@@ -186,10 +186,10 @@ angular.module('app')
         }
       };
 
-      $scope.getConduitInsulationName = function(group){
+      $scope.getConduitInsulationGroup = function(type){
         for (var i = 0; i < $scope.insulationTypes.length; i++) {
-          if($scope.insulationTypes[i].group == group){
-            return $scope.insulationTypes[i].type;
+          if($scope.insulationTypes[i].type == type){
+            return $scope.insulationTypes[i].group;
           } 
         }
       };
