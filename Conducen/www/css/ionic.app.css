@@ -7742,6 +7742,9 @@ button {
     text-transform: uppercase;
     line-height: 38px; }
 
+.error {
+  color: red; }
+
 secondary-menu {
   width: 100%;
   display: block;
@@ -7828,7 +7831,8 @@ form {
       color: #ababab;
       font-size: 14px; }
   form .conductors-container {
-    color: #6d6e76; }
+    color: #6d6e76;
+    margin-top: 15px; }
     form .conductors-container h3, form .conductors-container h4 {
       color: #6d6e76; }
     form .conductors-container .conductor {
@@ -7909,7 +7913,7 @@ form {
 
 .secondary-page {
   position: relative;
-  min-height: 100%; }
+  min-height: 100vh; }
   .secondary-page .header {
     width: 100%;
     margin-left: 20px;
@@ -7930,8 +7934,6 @@ form {
   .secondary-page .curves {
     top: 9%;
     z-index: -1; }
-  .secondary-page.conduit-form .curves {
-    top: 4%; }
   .secondary-page .results {
     padding-left: 20px;
     padding-right: 20px;
@@ -7943,47 +7945,62 @@ form {
       color: #6d6e76;
       font-size: 12px;
       font-family: "RobotoRegular", Verdana, Arial; }
-    .secondary-page .results .input-data {
-      margin-bottom: 20px; }
-      .secondary-page .results .input-data .data-container {
-        width: 80%;
-        margin: 0 auto;
-        border: 1px solid #DDDDDD; }
-        .secondary-page .results .input-data .data-container .item {
-          border: none;
-          background: none; }
-        .secondary-page .results .input-data .data-container .item-label {
-          float: left;
-          width: 33%;
-          color: #6d6e76;
-          font-size: 14px;
-          font-family: "RobotoRegular", Verdana, Arial; }
-        .secondary-page .results .input-data .data-container .item-data {
-          float: left;
-          width: 30%;
-          border-bottom: 1px solid #019d56;
-          margin-right: 3%;
-          padding-bottom: 3px;
-          color: #019d56;
-          font-size: 14px;
-          font-family: "RobotoRegular", Verdana, Arial;
-          text-transform: uppercase; }
-    .secondary-page .results .results-data .item {
-      border: none;
-      padding: 0px 0 5px; }
-    .secondary-page .results .results-data .item-label {
+    .secondary-page .results .input-data .data-container {
       width: 80%;
-      color: #6d6e76;
-      font-size: 15px;
-      font-family: "RobotoRegular", Verdana, Arial;
-      padding-bottom: 5px; }
-    .secondary-page .results .results-data .item-data {
-      width: 100%;
-      border-bottom: 1px solid #019d56;
-      padding-bottom: 5px;
-      color: #019d56;
-      font-size: 15px;
-      font-family: "RobotoRegular", Verdana, Arial;
-      text-transform: uppercase; }
+      margin: 0 auto;
+      border: 1px solid #DDDDDD; }
+      .secondary-page .results .input-data .data-container .item {
+        border: none;
+        background: none; }
+      .secondary-page .results .input-data .data-container .item-label {
+        float: left;
+        width: 33%;
+        color: #6d6e76;
+        font-size: 14px;
+        font-family: "RobotoRegular", Verdana, Arial; }
+      .secondary-page .results .input-data .data-container .item-data {
+        float: left;
+        width: 30%;
+        border-bottom: 1px solid #019d56;
+        margin-right: 3%;
+        padding-bottom: 3px;
+        color: #019d56;
+        font-size: 14px;
+        font-family: "RobotoRegular", Verdana, Arial;
+        text-transform: uppercase; }
+    .secondary-page .results .results-data {
+      padding-top: 20px; }
+      .secondary-page .results .results-data .item {
+        border: none;
+        padding: 0px 0 5px; }
+      .secondary-page .results .results-data .item-label {
+        width: 80%;
+        color: #6d6e76;
+        font-size: 15px;
+        font-family: "RobotoRegular", Verdana, Arial;
+        padding-bottom: 5px; }
+      .secondary-page .results .results-data .item-data {
+        width: 100%;
+        border-bottom: 1px solid #019d56;
+        padding-bottom: 5px;
+        color: #019d56;
+        font-size: 15px;
+        font-family: "RobotoRegular", Verdana, Arial;
+        text-transform: uppercase; }
+    .secondary-page .results h3 span {
+      font-size: 14px;
+      display: block; }
     .secondary-page .results button {
       margin-top: 20px; }
+
+.secondary-page .curves {
+  float: left; }
+  .secondary-page .curves.top {
+    top: 0;
+    position: relative; }
+    .secondary-page .curves.top img {
+      margin-top: -50px; }
+.secondary-page .results.conduit-results {
+  margin-top: 0; }
+.secondary-page .results .total {
+  padding-bottom: 5px; }

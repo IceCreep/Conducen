@@ -36,7 +36,7 @@ angular.module('app')
 
       $scope.selectLanguage = function(language){
         $translate.use(language);
-        // $scope.showMenu = false;
+        // $scope.toggleLanguageMenu();
       };
 
       $scope.isActive = function(language){

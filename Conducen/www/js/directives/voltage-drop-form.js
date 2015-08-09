@@ -24,6 +24,26 @@ angular.module('app')
 
       //Power Factor
       $scope.powerFactor;
+
+      //Type of calculation
+      $scope.calculation;
+      $scope.calculations = voltageDrop.getCalculations();
+
+      //Amperage
+      $scope.amperage;
+
+      //Voltage drop
+      $scope.voltageDrop;
+
+      //Circuit Distance
+      $scope.circuitDistance;
+
+      //Conductor Size
+      $scope.conductorSize;
+
+      $scope.calculate = function(){
+
+      }
      
     },
     templateUrl: 'templates/directives/voltage-drop-form.html',

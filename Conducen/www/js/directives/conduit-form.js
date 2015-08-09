@@ -114,10 +114,11 @@ angular.module('app')
       $scope.currentAreaMm = 0;
       $scope.currentAreaIn = 0;
       $scope.currentConductorType = 0;
-      $scope.result = 0;
+      $scope.conduitResult = {};
       $scope.data = {
         "conductors" : $scope.conductors,
-        "conductorType" : $scope.conductorType
+        "conductorType" : $scope.conductorType,
+        "totalArea" : $scope.currentArea
       };
 
       var Conductor = function(){
@@ -150,19 +151,33 @@ angular.module('app')
 
         $scope.currentConductor = new Conductor;
 
-        $scope.currentAreaMm += dataAdapter.getArea(newConductor).mm
-        $scope.currentAreaIn += dataAdapter.getArea(newConductor).inches;
+        $scope.updateArea(newConductor);
+      };
+
+      $scope.removeConductor = function(item){
+        $scope.conductors.splice($scope.conductors.indexOf(item), 1);
+
+        $scope.updateArea(item);
+      };
+
+      $scope.updateArea = function(item){
+
+        $scope.currentAreaMm = 0;
+        $scope.currentAreaIn = 0;
+
+        for (var i = 0; i < $scope.conductors.length; i++) {
+          $scope.currentAreaMm += dataAdapter.getArea($scope.conductors[i]).mm
+          $scope.currentAreaIn += dataAdapter.getArea($scope.conductors[i]).inches;
+        };
 
         if($translate.use() == "en"){
           $scope.currentArea = $scope.currentAreaIn;
         }else{
           $scope.currentArea = $scope.currentAreaMm;
         }
-      };
 
-      $scope.removeConductor = function(item){
-        $scope.conductors.splice($scope.conductors.indexOf(item), 1);
-      };
+        $scope.data.totalArea = $scope.currentArea;
+      }
 
       $scope.calculate = function(){
         if ($scope.currentConductorType!=null && $scope.conductors.length>0) {
@@ -171,7 +186,8 @@ angular.module('app')
           //Get the conduit type name
           $scope.data.conductorType = $scope.getConduitTypeName($scope.currentConductorType);
 
-          dataAdapter.setConduitResult($scope.result);
+          dataAdapter.setConduitResult($scope.result.conduitResult);
+          dataAdapter.setNippleResult($scope.result.nippleResult);
           dataAdapter.setConduitData($scope.data);
 
           $state.go('results');

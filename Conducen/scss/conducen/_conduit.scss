@@ -1,0 +1,27 @@
+//Conduit Fill
+
+.secondary-page{
+	.curves{
+		float: left;
+
+		&.top{
+			top: 0;
+			position: relative;
+
+			img{
+				margin-top: -50px;
+			}
+		}
+	}
+
+	.results{
+		&.conduit-results{
+			margin-top: 0;
+		}
+
+		.total{
+			padding-bottom: 5px;
+		}
+	}
+
+}

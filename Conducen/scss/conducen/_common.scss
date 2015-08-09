@@ -94,6 +94,10 @@ button{
 	}
 }
 
+.error{
+	color: red;
+}
+
 secondary-menu{
 	width: 100%;
 	display: block;
@@ -220,6 +224,7 @@ form{
 
 	.conductors-container{
 		color: #6d6e76;
+		margin-top: 15px;
 
 		h3, h4{
 			color: #6d6e76;

@@ -86,6 +86,32 @@ angular.module('app')
 			        }
 		        ];
 		    }
+	    },
+
+	    getCalculations: function(){
+	    	if ($translate.use()=="en") {
+		        return [
+			        {
+			          "name" : "Conductor Size",
+			          "id" : "1"
+			        },
+			        {
+			          "name" : "Circuit Distance",
+			          "id" : "2"
+			        }
+		        ];
+		    }else{
+		    	return [
+			        {
+			          "name" : "Calibre del Conductor",
+			          "id" : "1"
+			        },
+			        {
+			          "name" : "Longitud Máxima",
+			          "id" : "2"
+			        }
+		        ];
+		    }
 	    }
 	};
 }]);

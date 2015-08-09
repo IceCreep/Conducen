@@ -24,17 +24,31 @@
               <p class="item-data">{{conductor.insulation | translate}}</p>
               <div class="clearfix"></div>
             </div>
+            <p class="top-label total">{{"total_area_label" | translate}}: {{conduitData.totalArea | number : 4}} {{"area_units" | translate}}</p>
           </div>
         </div>
         <div class="results-data">
-          <h3>{{"conduit_fill_results" | translate}}:</h3>
+          <h3>{{"conduit_fill_results" | translate}}: <span>{{"conduit_fill_disclaimer" | translate}}</span></h3>
+          <p class="error" ng-hide="conduitResult.found">{{"conduit_fill_error_label" | translate}}</p>
+          <div class="item">
+            <h6 class="item-label">{{"trade_size_label" | translate}}</h6>
+            <p class="item-data">{{conduitResult.trade}}" {{conduitData.conductorType}}</p>
+          </div>
           <div class="item">
             <h6 class="item-label">{{"metric_designator_label" | translate}}</h6>
             <p class="item-data">{{conduitResult.designator}}</p>
           </div>
+        </div>
+        <div class="results-data">
+          <h3>{{"nipple_results" | translate}}: <span>{{"nipple_results_disclaimer" | translate}}</span></h3>          
+          <p class="error" ng-hide="nippleResult.found">{{"conduit_fill_error_label" | translate}}</p>
           <div class="item">
             <h6 class="item-label">{{"trade_size_label" | translate}}</h6>
-            <p class="item-data">{{conduitResult.trade}}</p>
+            <p class="item-data">{{nippleResult.trade}}" {{conduitData.conductorType}}</p>
+          </div>
+          <div class="item">
+            <h6 class="item-label">{{"metric_designator_label" | translate}}</h6>
+            <p class="item-data">{{nippleResult.designator}}</p>
           </div>
         </div>
         <button class="green-bg full-width" ng-click="goBack()">

@@ -4,11 +4,13 @@ angular.module('app')
 
     $scope.conduitData = dataAdapter.getConduitData();
     $scope.conduitResult = dataAdapter.getConduitResult();
+    $scope.nippleResult = dataAdapter.getNippleResult();
 
     $rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){ 
 			$scope.conduitData = dataAdapter.getConduitData();  
 			$scope.conduitResult = dataAdapter.getConduitResult();
+            $scope.nippleResult = dataAdapter.getNippleResult();
 		});
 
     $scope.goBack = function(){

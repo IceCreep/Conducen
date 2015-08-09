@@ -1,6 +1,6 @@
 .secondary-page{
 	position: relative;
-	min-height: 100%;
+	min-height: 100vh;
 
 	.header{
 		width: 100%;
@@ -32,12 +32,6 @@
 		z-index: -1;
 	}
 
-	&.conduit-form{
-		.curves{
-			top: 4%;
-		}
-	}
-
 	.results{
 		padding-left: 20px;
 		padding-right: 20px;
@@ -53,7 +47,6 @@
 		}
 
 		.input-data{
-			margin-bottom: 20px;
 
 			.data-container{
 				width: 80%;
@@ -88,6 +81,7 @@
 		}
 
 		.results-data{
+			padding-top: 20px;
 
 			.item{
 				border: none;
@@ -110,6 +104,13 @@
     			font-size: 15px;
 				font-family: "RobotoRegular", Verdana, Arial;
 				text-transform: uppercase;
+			}
+		}
+
+		h3{
+			span{
+				font-size: 14px;
+    			display: block;
 			}
 		}
 

@@ -3,6 +3,7 @@ angular.module('app')
 
 	var conduitData;
 	var conduitResult;
+	var nippleResult;
 
 	return {
 	    getArea: function(conductor){
@@ -25,33 +26,66 @@ angular.module('app')
 	    },
 
 	    getDesignatorAndTrade: function(area, type){
-	    	var designator;
-	    	var trade;
-	    	var designatorFound = false;
-	    	var tradeFound = false;
+	    	var conduitDesignator;
+	    	var conduitTrade;
+	    	var nippleDesignator;
+	    	var nippleTrade;
+	    	var conduitFound = false;
+	    	var nippleFound = false;
 	    	var result;
+	    	var dataLength = 0;
+	    	var typeItems = [];
 
 	    	for (var i = 0; i < table4A.data.length; i++) {
-	    		var item = table4A.data[i];
+	    		var generalItem = table4A.data[i];
 
-	    		if(type == item.type && designatorFound == false){
+	    		if(type == generalItem.type){
+	    			typeItems.push(generalItem);
+	    			dataLength = typeItems.length;
+	    		}
+	    	}
+
+	    	for (var i = 0; i < dataLength; i++) {
+	    		var item = typeItems[i];
+
+	    		if(type == item.type && conduitFound == false){
 		    		if(area < item.mm40){
-		    			designatorFound = true;
-		    			designator = item.designator;
+		    			conduitFound = true;
+		    			conduitDesignator = item.designator;
+		    			conduitTrade = item.size;
+		    		}else{
+			    		if (i >= dataLength-1) {
+			    			conduitDesignator = item.designator;
+			    			conduitTrade = item.size;
+			    		}
 		    		}
 	    		}
 	    		
-	    		if(type == item.type && tradeFound == false){
+	    		if(type == item.type && nippleFound == false){
 		    		if(area < item.mm60){
-		    			tradeFound = true;
-		    			trade = item.size;
+		    			nippleFound = true;
+		    			nippleDesignator = item.designator;
+		    			nippleTrade = item.size;
+		    		}else{
+		    			if (i >= dataLength-1) {
+			    			nippleDesignator = item.designator;
+			    			nippleTrade = item.size;
+			    		}
 		    		}
 	    		}
 	    	};
 
 	    	return result = {
-	    		"designator" : designator,
-	    		"trade" : trade
+	    		"conduitResult": {
+		    		"designator" : conduitDesignator,
+		    		"trade" : conduitTrade,
+		    		"found" : conduitFound
+	    		},
+	    		"nippleResult": {
+	    			"designator" : nippleDesignator,
+		    		"trade" : nippleTrade,
+		    		"found" : nippleFound
+	    		}
 	    	};
 	    },
 
@@ -69,6 +103,14 @@ angular.module('app')
 
 	    getConduitResult: function(){
 	    	return conduitResult;
+	    },
+
+	    setNippleResult: function(result){
+	    	nippleResult = result;
+	    },
+
+	    getNippleResult: function(){
+	    	return nippleResult;
 	    }
 	};
 }]);
