@@ -197,7 +197,7 @@ secondary-menu{
 	}
 }
 
-form{
+form, .popover{
 	margin: 19% auto 5%;
 	width: 90%;
 
@@ -214,11 +214,20 @@ form{
 
 		.item{
 			border-color: #009e49;
+
+			select{
+				padding: 0px 48px 0px 16px;
+			}
+			
 		}
 
 		.input-label{
 			color: #ababab;
 			font-size: 14px;
+		}
+
+		.error{
+			color: red;
 		}
 	}
 

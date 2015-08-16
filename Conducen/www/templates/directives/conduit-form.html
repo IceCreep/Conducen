@@ -1,9 +1,10 @@
-<form>
-	<list>
-		<div class="form-item">
-			<p>1. {{"conduit_instruction_1" | translate}}</p>
-		</div>
-		<fieldset>
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view style="width: 80%; height: 515px">
+    <ion-header-bar>
+      <h1 class="title">ADD CONDUCTOR</h1><span class="icon ion-close-round" ng-click="closePopover();"></span>
+    </ion-header-bar>
+    <ion-pane>
+      <fieldset>
 			<div class="form-item">
 				<p>A. {{"conduit_instruction_A" | translate}}</p>
 				<label class="item item-input item-select">
@@ -33,13 +34,76 @@
 				 </label>
 			</div>
 			<div class="form-item">
+				<p class="error" ng-show="showConductorError">* {{"conduit_fill_error_3_label" | translate}}</p>
+			</div>
+			<div class="form-item">
 				<p>D. {{"conduit_instruction_D" | translate}}</p>
 				<button class="green-bg full-width" ng-click="addConductor(currentConductor)">
 					<span class="icon ion-plus-round"></span>
 					<span class="label">{{"add_label" | translate}}</span>
 				</button>
 			</div>
+			<div class="form-item">
+				<button class="green-bg full-width" ng-click="closePopover();">
+					<span class="icon ion-android-arrow-back"></span>
+					<span class="label">{{"back_label" | translate}}</span>
+				</button>
+			</div>
 		</fieldset>
+    </ion-pane>
+  </ion-popover-view>
+</script>
+<form>
+	<list>
+		<div class="form-item">
+			<p>1. {{"conduit_instruction_1" | translate}}</p>
+		</div>
+		<!--fieldset>
+			<div class="form-item">
+				<p>A. {{"conduit_instruction_A" | translate}}</p>
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      {{"conductor_size_label" | translate}}
+				    </div>
+				    <select ng-model="currentConductor.size">
+				      <option ng-repeat="size in wireSizes">{{size}}</option>
+				    </select>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p>B. {{"conduit_instruction_B" | translate}}</p>
+				<label class="item item-input">
+				    <input type="number" placeholder="{{'conductors_label' | translate}}" ng-model="currentConductor.wires"></input>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p>C. {{"conduit_instruction_C" | translate}}</p>
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      {{"insulation_type_label" | translate}}
+				    </div>
+				    <select ng-model="currentConductor.insulation">
+				      <option ng-repeat="type in insulationTypes" value="{{type.type}}">{{type.type}}</option>
+				    </select>
+				 </label>
+			</div>
+			<div class="form-item">
+				<p class="error" ng-show="showConductorError">* {{"conduit_fill_error_3_label" | translate}}</p>
+			</div>
+			<div class="form-item">
+				<p>D. {{"conduit_instruction_D" | translate}}</p>
+				<button class="green-bg full-width" ng-click="openPopover($event)">
+					<span class="icon ion-plus-round"></span>
+					<span class="label">{{"add_label" | translate}}</span>
+				</button>
+			</div>
+		</fieldset-->
+		<div class="form-item">
+				<button class="green-bg full-width" ng-click="openPopover($event)">
+					<span class="icon ion-plus-round"></span>
+					<span class="label">{{"add_label" | translate}}</span>
+				</button>
+			</div>
 		<div class="conductors-container" ng-show="conductors.length">
 			<h3>{{"conductors_label" | translate}}</h3>
 			<div class="conductor" ng-repeat="conductor in conductors">
@@ -60,6 +124,9 @@
 			      <option ng-repeat="type in conduitTypes" value="{{type.type}}">{{type.name}}</option>
 			    </select>
 			 </label>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showCalculateError">* {{"conduit_fill_error_2_label" | translate}}</p>
 		</div>
 		<div class="form-item">
 			<p>3. {{"conduit_instruction_3" | translate}}</p>

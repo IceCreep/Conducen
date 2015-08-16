@@ -5,7 +5,7 @@ angular.module('app')
     scope: {
       
     },
-    controller: function($scope, $rootScope, $state, $translate) {
+    controller: function($scope, $rootScope, $state, $translate, $ionicPopover) {
 
       $scope.wireSizes = [
         14, 12, 10, 8, 6, 4, 3, 2, 1, "1/0", "2/0", "3/0", "4/0", 250, 300, 350, 400, 500, 600, 700, 750, 1000
@@ -120,6 +120,8 @@ angular.module('app')
         "conductorType" : $scope.conductorType,
         "totalArea" : $scope.currentArea
       };
+      $scope.showCalculateError = false;
+      $scope.showConductorError = false;
 
       var Conductor = function(){
         return {
@@ -132,12 +134,51 @@ angular.module('app')
 
       this.currentConductor = new Conductor;
 
+      //Modal Testing
+      // .fromTemplateUrl() method
+      // .fromTemplate() method
+      var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
+
+      $scope.popover = $ionicPopover.fromTemplate(template, {
+        scope: $scope
+      });
+
+      // .fromTemplateUrl() method
+      $ionicPopover.fromTemplateUrl('my-popover.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
+
+
+      $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+      };
+      $scope.closePopover = function() {
+        $scope.popover.hide();
+      };
+      //Cleanup the popover when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.popover.remove();
+      });
+      // Execute action on hide popover
+      $scope.$on('popover.hidden', function() {
+        // Execute action
+      });
+      // Execute action on remove popover
+      $scope.$on('popover.removed', function() {
+        // Execute action
+      });
+
       $scope.addConductor = function(item){
         if(item == null){
+          //$scope.openPopover();
+          $scope.showConductorError = true;
           return;
         }
 
         if(item.wires == null || item.size == null || item.insulation == null){
+          $scope.showConductorError = true;
           return;
         }
 
@@ -152,6 +193,9 @@ angular.module('app')
         $scope.currentConductor = new Conductor;
 
         $scope.updateArea(newConductor);
+
+        $scope.showCalculateError = false;
+        $scope.showConductorError = false;
       };
 
       $scope.removeConductor = function(item){
@@ -190,7 +234,11 @@ angular.module('app')
           dataAdapter.setNippleResult($scope.result.nippleResult);
           dataAdapter.setConduitData($scope.data);
 
-          $state.go('results');
+          $scope.showCalculateError = false;
+
+          $state.go('results', {"id": "conduit"});
+        }else{
+          $scope.showCalculateError = true;
         }
       };
 

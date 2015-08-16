@@ -56,26 +56,44 @@
 				.item{
 					border: none;
 					background: none;
-				}
 
-				.item-label{
-					float: left;
-					width: 33%;
-					color: #6d6e76;
-					font-size: 14px;
-					font-family: "RobotoRegular", Verdana, Arial;
-				}
+					.item-label{
+						float: left;
+						width: 33%;
+						color: #6d6e76;
+						font-size: 14px;
+						font-family: "RobotoRegular", Verdana, Arial;
+					}
 
-				.item-data{
-					float: left;
-					width: 30%;
-					border-bottom: 1px solid #019d56;
-					margin-right: 3%;
-	    			padding-bottom: 3px;
-	    			color: #019d56;
-	    			font-size: 14px;
-					font-family: "RobotoRegular", Verdana, Arial;
-					text-transform: uppercase;
+					.item-data{
+						float: left;
+						width: 30%;
+						border-bottom: 1px solid #019d56;
+						margin-right: 3%;
+		    			padding-bottom: 0px;
+		    			color: #019d56;
+		    			font-size: 14px;
+						font-family: "RobotoRegular", Verdana, Arial;
+						text-transform: uppercase;
+					}
+
+					&.data-row{
+						.item-label{
+							width: 50%;
+							padding-left: 5px;
+							margin-top: 15px;
+
+							&.no-margin{
+								margin-top: 0;
+							}
+						}
+
+						.item-data{
+							width: 43%;
+							margin-right: 7%;
+							padding-left: 10px;
+						}
+					}
 				}
 			}
 		}

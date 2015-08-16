@@ -1,16 +1,36 @@
 angular.module('app')
 
-.controller('ResultsCtrl', ['$scope', 'dataAdapter', '$rootScope', '$window', function($scope, dataAdapter, $rootScope, $window) {
+.controller('ResultsCtrl', ['$scope', 'dataAdapter', '$rootScope', '$window', '$stateParams', 'voltageDrop', function($scope, dataAdapter, $rootScope, $window, $stateParams, voltageDrop) {
 
-    $scope.conduitData = dataAdapter.getConduitData();
-    $scope.conduitResult = dataAdapter.getConduitResult();
-    $scope.nippleResult = dataAdapter.getNippleResult();
+    $scope.state = $stateParams.id;
+    
+    if($scope.state == "conduit"){
+        $scope.conduitData = dataAdapter.getConduitData();
+        $scope.conduitResult = dataAdapter.getConduitResult();
+        $scope.nippleResult = dataAdapter.getNippleResult();
+    }
+
+    if($scope.state == "voltage-drop"){
+        $scope.voltageDropInputData = voltageDrop.getInputData();
+        $scope.voltageDropResult = voltageDrop.getResultData();
+    }    
 
     $rootScope.$on('$stateChangeStart', 
 		function(event, toState, toParams, fromState, fromParams){ 
-			$scope.conduitData = dataAdapter.getConduitData();  
-			$scope.conduitResult = dataAdapter.getConduitResult();
-            $scope.nippleResult = dataAdapter.getNippleResult();
+            if(toState.name == "results"){
+    			$scope.state = $stateParams.id;
+        
+                // if($scope.state == "conduit"){
+                    $scope.conduitData = dataAdapter.getConduitData();
+                    $scope.conduitResult = dataAdapter.getConduitResult();
+                    $scope.nippleResult = dataAdapter.getNippleResult();
+                // }
+
+                // if($scope.state == "voltage-drop"){
+                    $scope.voltageDropInputData = voltageDrop.getInputData();
+                    $scope.voltageDropResult = voltageDrop.getResultData();
+                // } 
+            }
 		});
 
     $scope.goBack = function(){

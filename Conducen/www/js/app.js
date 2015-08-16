@@ -45,7 +45,7 @@ angular.module('app', ['ionic', 'translate', 'app.controllers', 'ngAnimate'])
   })
 
   .state('results', {
-    url: "/results",
+    url: "/results/:id",
     templateUrl: "templates/results.html",
     controller: 'ResultsCtrl'
   })

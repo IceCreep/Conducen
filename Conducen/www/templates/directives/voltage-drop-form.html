@@ -7,7 +7,7 @@
 			      {{"conductor_material_label" | translate}}
 			    </div>
 			    <select ng-model="conductorMaterial">
-			      <option ng-repeat="material in conductorMaterials" value="{{material.id}}">{{material.name}}</option>
+			      <option ng-repeat="material in conductorMaterials" value="{{material.type}}">{{material.name}}</option>
 			    </select>
 			 </label>
 		</div>
@@ -18,7 +18,7 @@
 			      {{"conduit_material_label" | translate}}
 			    </div>
 			    <select ng-model="conduitMaterial">
-			      <option ng-repeat="material in conduitMaterials" value="{{material.id}}">{{material.name}}</option>
+			      <option ng-repeat="material in conduitMaterials" value="{{material.type}}">{{material.name}}</option>
 			    </select>
 			 </label>
 		</div>
@@ -63,7 +63,7 @@
 			<div class="form-item" ng-show="calculation==1 || calculation==2">
 				<p>A. {{"voltage_drop_instruction_A" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'amperage_label' | translate}}" ng-model="amperage"></input>
+				    <input type="number" placeholder="{{'amperage_label' | translate}}" ng-model="ampacity"></input>
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==1 || calculation==2">
@@ -79,9 +79,9 @@
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==2">
-				<p>D. {{"voltage_drop_instruction_D" | translate}}</p>
+				<p>C. {{"voltage_drop_instruction_D" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'conductor_size_label' | translate}}" ng-model="conductorSize"></input>
+				    <input type="number" placeholder="{{'conductor_size_label' | translate}}" ng-model="conductorLength"></input>
 				</label>
 			</div>
 		</fieldset>

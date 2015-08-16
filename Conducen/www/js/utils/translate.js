@@ -40,6 +40,8 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             trade_size_label: "Trade Size",
             back_label: "Back",
             conduit_fill_error_label: "The conduit size is not big enough given the input parameters",
+            conduit_fill_error_2_label: "Please add at least one conductor set and make sure to select the conduit type",
+            conduit_fill_error_3_label: "Please make sure you have entered all the needed data for the conductor before continuing.",
             //Voltage Drop
             voltage_drop_instruction_1: "Please select the type of material the conductors are made of",
             voltage_drop_instruction_2: "Please select the material of the conduit",
@@ -53,13 +55,15 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             voltage_drop_instruction_C: "Total estimated length of the conductor run.",
             voltage_drop_instruction_D: "Enter the conductor size",
             conductor_material_label: "Conductor Material",
-            conduit_material_label: "Conductor Material",
+            conduit_material_label: "Conduit Material",
             phase_label: "Phase",
             voltage_label: "Voltage",
             power_factor_label: "Power Factor",
             calculation_type_label: "Calculation Type",
             amperage_label: "Amperage",
-            circuit_distance_label: "Circuit Distance"
+            circuit_distance_label: "Circuit Distance",
+            conductor_size_results: "Conductor Size Results",
+            efficient_z_label: "Efficient Z"
         });
         $translateProvider.translations('es', {
             choose_language_label: "Elige el lenguaje",
@@ -101,6 +105,8 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             trade_size_label: "Tamaño del Niple",
             back_label: "Volver Atrás",
             conduit_fill_error_label: "El tamaño del conduit es insuficiente",
+            conduit_fill_error_2_label: "Asegurese de haber agregado al menos un conductor y haber seleccionado el tipo de conduit",
+            conduit_fill_error_3_label: "Asegurese de haber llenado todos los campos necesarios antes de agregar un conductor",
             //Voltage Drop
             voltage_drop_instruction_1: "Por favor selecione el material con el que está construirdo el conductor.",
             voltage_drop_instruction_2: "The number of conductor of this type in the voltage_drop.",
@@ -115,6 +121,8 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             calculation_type_label: "Tipo de Cálculo",
             amperage_label: "Ampacidad",
             circuit_distance_label: "Distancia del Circuito",
+            conductor_size_results: "Resultados para el calibre del conductor",
+            efficient_z_label: "Z eficaz de conductor"
         });
         $translateProvider.preferredLanguage("en");
         $translateProvider.fallbackLanguage("en");
