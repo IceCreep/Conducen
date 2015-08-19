@@ -38,58 +38,96 @@ angular.module('app')
       //Conductor size
       $scope.conductorLength;
 
-      //Conductor Size
-      $scope.conductorSize;
+      //Error flags
+      $scope.showZError = false;
+      $scope.showRError = false;
+      $scope.showCalculationError = false;
+      $scope.showEmptyInputError = false;
 
       $scope.calculate = function(){
 
-        //Warning: Needs to validate the form
-
-        //z eficaz      z = Rcosθ + Xlsenθ
-        //Test case
-        $scope.conductorMaterial = "cooper";
-        $scope.conduitMaterial = "pvc";
-        $scope.powerFactor = 0.8;
-        $scope.phase = 3;
-        $scope.voltage = 480;
-        $scope.voltageDrop = 3;
-        $scope.ampacity = 200;
-        $scope.conductorLength = 50;
-
-        var r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, 0);
-        console.log("r " + r);
-        var xl = voltageDrop.getXL($scope.conduitMaterial, 0);
-        console.log("xl " + xl);
-
-        var efficientZ = voltageDrop.getEfficientZ($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, 0);
-
-        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, $scope.conductorLength);
-        console.log("z " + z);
-
-        var size = voltageDrop.getSize(z, $scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor);
-        console.log("size " + size);   
-        
-        if(size > 0){
-          voltageDrop.setInputData($scope.conductorMaterial, $scope.conduitMaterial, $scope.phase, $scope.voltage, $scope.voltageDrop, $scope.powerFactor, $scope.ampacity, $scope.conductorLength);
-          voltageDrop.setResultData(size, z);
-          $state.go('results', {"id": "voltage-drop"});
-        }else{
-          if(size == 0){
-            //Error: Data out of table
-          }else{
-            //Error
-          }
-        }    
-
         switch($scope.calculation){
 
-          case 1:
-
+          case "1":
+            $scope.calculateConductorSize();
           break;
 
           default:
           break;
         }
+      },
+
+      $scope.calculateConductorSize = function(){
+        //Warning: Needs to validate the form
+        if ($scope.conductorMaterial == null || $scope.conduitMaterial == null || $scope.phase == null ||  $scope.voltage == null 
+          || $scope.powerFactor == null || $scope.calculation == null || $scope.ampacity == null || $scope.conductorLength == null) {
+
+          $scope.showEmptyInputError = true;
+
+          return;
+        }else{
+          $scope.showEmptyInputError = false;          
+        }
+
+        //z eficaz      z = Rcosθ + Xlsenθ
+        //Test case
+        // $scope.conductorMaterial = "cooper";
+        // $scope.conduitMaterial = "pvc";
+        // $scope.powerFactor = 0.8;
+        // $scope.phase = 3;
+        // $scope.voltage = 480;
+        // $scope.voltageDrop = 3;
+        // $scope.ampacity = 200;
+        // $scope.conductorLength = 50;
+
+        var r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, 0);
+        console.log("r " + r);
+        if(r == "" || r <= 0 || r ==null){
+            $scope.showRError = true;
+
+            return;
+        }else{
+            $scope.showRError = false;
+        }
+
+        var xl = voltageDrop.getXL($scope.conduitMaterial, 0);
+        console.log("xl " + xl);
+
+        var efficientZ = voltageDrop.getEfficientZ($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, 0);
+
+        if (efficientZ <=0 || efficientZ == null) {
+          $scope.showZError = true;
+
+          return;
+        }else{
+          $scope.showZError = false;
+        }
+
+        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, $scope.conductorLength);
+        console.log("z " + z);
+
+        var result = voltageDrop.getSize(z, $scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor);
+        console.log("size " + result.size);   
+        
+        if(result.size != null){
+          voltageDrop.setInputData($scope.calculations[$scope.calculation].name, $scope.conductorMaterial, $scope.conduitMaterial, $scope.phase, $scope.voltage, $scope.voltageDrop, $scope.powerFactor, $scope.ampacity, $scope.conductorLength);
+          voltageDrop.setResultData(result);
+          $state.go('results', {"id": "voltage-drop"});
+
+          $scope.showCalculationError = false;
+        }else{
+          if(result.size == 0){
+            //Error: Data out of table
+            $scope.showCalculationError = true;
+
+            return;
+          }else{
+            //Error
+            $scope.showCalculationError = true;
+
+            return;
+          }
+        }  
       }
      
     },

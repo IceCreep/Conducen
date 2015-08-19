@@ -177,7 +177,7 @@ angular.module('app')
 	    },
 
 	    getSize: function(z, conductor, conduit, powerFactor){
-	    	var efficientZ;
+	    	var efficientZ = -1;
 	    	var item;
 	    	var result = -1;
 
@@ -190,15 +190,25 @@ angular.module('app')
 	    			result = item.size;
 	    		}else{
 	    			result = item.size;
-	    			return result;
+
+	    			return { 
+	    				"size" : result,
+	    				"efficientZ" : efficientZ,
+	    				"error" : null
+	    			};
 	    		}
 	    	}
 
-	    	return 0;
+	    	return { 
+				"size" : result,
+				"efficientZ" : efficientZ,
+				"error" : true
+			};
 	    },
 
-	    setInputData: function(conductorMaterial, conduitMaterial, phase, voltage, voltageDrop, powerFactor, ampacity, conductorLength){
+	    setInputData: function(calculationType, conductorMaterial, conduitMaterial, phase, voltage, voltageDrop, powerFactor, ampacity, conductorLength){
 	    	inputData = {
+	    		"calculationType" : calculationType,
 	    		"conductorMaterial" : conductorMaterial,
 	    		"conduitMaterial" : conduitMaterial,
 	    		"phase" : phase,
@@ -214,11 +224,8 @@ angular.module('app')
 	    	return inputData;
 	    },
 
-	    setResultData: function(size, z){
-	    	resultData = {
-	    		"size" : size,
-	    		"z" : z
-	    	}
+	    setResultData: function(result){
+	    	resultData = result;
 	    },
 
 	    getResultData: function(){

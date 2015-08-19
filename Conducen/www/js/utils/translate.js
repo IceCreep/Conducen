@@ -11,6 +11,9 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             home_label: "Home",
             calculator_label: "Calculator",
             area_units: "in",
+            conductor_label : "Conductor",
+            conduit_label : "Conduit",
+            length_label : "Length",
             //Conduit Fill
             conductors_label: "Conductors",
             wires_label: "Wires",
@@ -39,8 +42,8 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             metric_designator_label: "Metric Designator",
             trade_size_label: "Trade Size",
             back_label: "Back",
-            conduit_fill_error_label: "The conduit size is not big enough given the input parameters",
-            conduit_fill_error_2_label: "Please add at least one conductor set and make sure to select the conduit type",
+            conduit_fill_error_label: "The conduit size is not big enough given the input parameters.",
+            conduit_fill_error_2_label: "Please add at least one conductor set and make sure to select the conduit type.",
             conduit_fill_error_3_label: "Please make sure you have entered all the needed data for the conductor before continuing.",
             //Voltage Drop
             voltage_drop_instruction_1: "Please select the type of material the conductors are made of",
@@ -61,9 +64,13 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             power_factor_label: "Power Factor",
             calculation_type_label: "Calculation Type",
             amperage_label: "Amperage",
-            circuit_distance_label: "Circuit Distance",
+            conductor_length_label: "Conductor Length",
             conductor_size_results: "Conductor Size Results",
-            efficient_z_label: "Efficient Z"
+            efficient_z_label: "Efficient Z",
+            voltage_drop_error_1_label: "Z can't be calculated for the input data. Please change your inputs and try again",
+            voltage_drop_error_2_label: "An error has ocurred with the calculation. Please review your input data and try again",
+            voltage_drop_error_3_label: "Please make sure you have entered all the needed data for the conductor before continuing.",
+            voltage_drop_error_4_label: "The resistance can't be calculated using the selected materials for the conductor and conduit."
         });
         $translateProvider.translations('es', {
             choose_language_label: "Elige el lenguaje",
@@ -75,6 +82,9 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             our_brands_image: "localized/our-brands-es.png",
             menu_label: "Menú",
             home_label: "Principal",
+            conductor_label : "Conductor",
+            conduit_label : "Conduit",
+            length_label : "Distancia",
             //Conduit Fill
             calculator_label: "Calculadora",
             area_units: "mm",
@@ -120,9 +130,13 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             power_factor_label: "Factor de Potencia",
             calculation_type_label: "Tipo de Cálculo",
             amperage_label: "Ampacidad",
-            circuit_distance_label: "Distancia del Circuito",
+            conductor_length_label: "Distancia del Circuito",
             conductor_size_results: "Resultados para el calibre del conductor",
-            efficient_z_label: "Z eficaz de conductor"
+            efficient_z_label: "Z eficaz de conductor",
+            voltage_drop_error_1_label: "La Z no puede ser calculada usando los datos de entrada. Por favor revise sus datos e inténtelo de nuevo.",
+            voltage_drop_error_2_label: "Un error ha ocurrido con los cálculos. Por favor revise sus datos de entrada e inténtelo de nuevo.",
+            voltage_drop_error_3_label: "Por favor asegurese de haber introducido todos los datos necesarios antes de continuar.",
+            voltage_drop_error_4_label: "La resistencia no puede ser cálculada usando los materiales seleccionados para el conductor y el conduit."
         });
         $translateProvider.preferredLanguage("en");
         $translateProvider.fallbackLanguage("en");

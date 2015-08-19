@@ -75,7 +75,7 @@
 			<div class="form-item" ng-show="calculation==1">
 				<p>C. {{"voltage_drop_instruction_C" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'circuit_distance_label' | translate}}" ng-model="circuitDistance"></input>
+				    <input type="number" placeholder="{{'conductor_length_label' | translate}}" ng-model="conductorLength"></input>
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==2">
@@ -85,6 +85,18 @@
 				</label>
 			</div>
 		</fieldset>
+		<div class="form-item">
+			<p class="error" ng-show="showZError">* {{"voltage_drop_error_1_label" | translate}}</p>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showCalculationError">* {{"voltage_drop_error_2_label" | translate}}</p>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showEmptyInputError">* {{"voltage_drop_error_3_label" | translate}}</p>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showRError">* {{"voltage_drop_error_4_label" | translate}}</p>
+		</div>
 		<div class="form-item" ng-show="calculation!=null">
 			<p>8. {{"conduit_instruction_3" | translate}}</p>
 			<button class="green-bg full-width" ng-click="calculate()">

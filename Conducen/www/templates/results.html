@@ -60,11 +60,11 @@
       <div class="results voltage-drop-results" ng-if="state=='voltage-drop'">
         <div class="input-data">
           <h3>{{"input_values_label" | translate}}:</h3>
-          <p class="top-label">{{"calculation_type_label" | translate}}: {{voltageDrop.calculationType}}</p>
+          <p class="top-label">{{"calculation_type_label" | translate}}: {{voltageDropInputData.calculationType}}</p>
           <div class="data-container">
             <div class="item data-row">
-              <h6 class="item-label no-margin">{{"conductor_material_label" | translate}}</h6>
-              <h6 class="item-label no-margin">{{"conduit_material_label" | translate}}</h6>
+              <h6 class="item-label no-margin">{{"conductor_label" | translate}}</h6>
+              <h6 class="item-label no-margin">{{"conduit_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.conductorMaterial | translate}}</p>
               <p class="item-data">{{voltageDropInputData.conduitMaterial | translate}}</p>
 
@@ -78,24 +78,24 @@
               <p class="item-data">{{voltageDropInputData.powerFactor | translate}}</p>
               <p class="item-data">{{voltageDropInputData.ampacity | translate}}</p>
 
-              <h6 class="item-label">{{"circuit_distance_label" | translate}}</h6>
               <h6 class="item-label">{{"voltage_drop_label" | translate}}</h6>
-              <p class="item-data">{{voltageDropInputData.conductorLength | translate}}</p>
+              <h6 class="item-label">{{"length_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.voltageDrop | translate}}</p>
+              <p class="item-data">{{voltageDropInputData.conductorLength | translate}}</p>
               <div class="clearfix"></div>
             </div>
           </div>
         </div>
         <div class="results-data">
           <h3>{{"conductor_size_results" | translate}}:</h3>
-          <!-- <p class="error" ng-hide="conduitResult.found">{{"conduit_fill_error_label" | translate}}</p> -->
+          <p class="error" ng-show="voltageDropResult.size.error">{{"conduit_fill_error_label" | translate}}</p>
           <div class="item">
             <h6 class="item-label">{{"size_label" | translate}}</h6>
             <p class="item-data">{{voltageDropResult.size}} AWG</p>
           </div>
           <div class="item">
             <h6 class="item-label">{{"efficient_z_label" | translate}}</h6>
-            <p class="item-data">{{voltageDropResult.z | number : 4}} ohmios/km al neutro</p>
+            <p class="item-data">{{voltageDropResult.efficientZ | number : 4}} ohmios/km al neutro</p>
           </div>
         </div>
       </div>

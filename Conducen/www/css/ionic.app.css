@@ -7986,7 +7986,8 @@ form, .popover {
       padding-top: 20px; }
       .secondary-page .results .results-data .item {
         border: none;
-        padding: 0px 0 5px; }
+        padding: 0px 0 5px;
+        margin-top: 15px; }
       .secondary-page .results .results-data .item-label {
         width: 80%;
         color: #6d6e76;
