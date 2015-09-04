@@ -206,8 +206,38 @@ angular.module('app')
 			};
 	    },
 
-	    setInputData: function(calculationType, conductorMaterial, conduitMaterial, phase, voltage, voltageDrop, powerFactor, ampacity, conductorLength){
+	    getEfficientZByWireSize: function(conductor, conduit, powerFactor, wireSize){
+	    	var efficientZ = -1;
+	    	var item;
+
+	    	for (var i = 0; i < table9A.data.length; i++) {
+	    		item = table9A.data[i];
+
+	    		if(item.size == wireSize){
+	    			efficientZ = this.getEfficientZ(conductor, conduit, powerFactor, i);
+	    		}
+	    	}
+
+	    	return { 
+				"efficientZByWireSize" : efficientZ,
+				"error" : true
+			};
+	    },
+
+	    getConductorLength: function(phase, voltageDrop, voltage, ampacity, efficientZ){
+			var l = 0;
+
+	    	if (phase == 3) {
+	    		l = (10 * voltageDrop * voltage) / (efficientZ * 1.732 * ampacity);
+	    	}else{
+	    		l = (5 * voltageDrop * voltage) / (efficientZ * ampacity);
+	    	}
+	    	return l;
+	    },
+
+	    setInputData: function(calculationTypeIndex, calculationType, conductorMaterial, conduitMaterial, phase, voltage, voltageDrop, powerFactor, ampacity, conductorLength){
 	    	inputData = {
+	    		"calculationTypeIndex" : calculationTypeIndex,
 	    		"calculationType" : calculationType,
 	    		"conductorMaterial" : conductorMaterial,
 	    		"conduitMaterial" : conduitMaterial,
@@ -231,5 +261,12 @@ angular.module('app')
 	    getResultData: function(){
 	    	return resultData;
 	    },
+
+	    //For getting the Maximum Circuit Distance
+	    getWireSizes: function(){
+	    	return [
+		        14, 12, 10, 8, 6, 4, 3, 2, 1, "1/0", "2/0", "3/0", "4/0", 250, 300, 350, 400, 500, 600, 700, 750, 1000
+		    ];
+	    }
 	};
 }]);

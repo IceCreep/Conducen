@@ -5,7 +5,6 @@
 		</div>
 		<fieldset>
 			<div class="form-item">
-				<p>A. {{"conduit_instruction_A" | translate}}</p>
 				<label class="item item-input item-select">
 				    <div class="input-label">
 				      {{"conductor_size_label" | translate}}
@@ -15,14 +14,14 @@
 				    </select>
 				 </label>
 			</div>
-			<div class="form-item">
-				<p>B. {{"conduit_instruction_B" | translate}}</p>
+			<div class="form-item custom border">
+				<p class="input-label">{{'conductors_label' | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'conductors_label' | translate}}" ng-model="currentConductor.wires"></input>
+				    <input type="number" placeholder="0" ng-model="currentConductor.wires"></input>
 				 </label>
+				 <div class="clearfix"></div>
 			</div>
 			<div class="form-item">
-				<p>C. {{"conduit_instruction_C" | translate}}</p>
 				<label class="item item-input item-select">
 				    <div class="input-label">
 				      {{"insulation_type_label" | translate}}
@@ -36,7 +35,6 @@
 				<p class="error" ng-show="showConductorError">* {{"conduit_fill_error_3_label" | translate}}</p>
 			</div>
 			<div class="form-item">
-				<p>D. {{"conduit_instruction_D" | translate}}</p>
 				<button class="green-bg full-width" ng-click="addConductor(currentConductor)">
 					<span class="icon ion-plus-round"></span>
 					<span class="label">{{"add_label" | translate}}</span>
@@ -44,14 +42,20 @@
 			</div>
 		</fieldset>
 		<div class="conductors-container" ng-show="conductors.length">
-			<h3>{{"conductors_label" | translate}}</h3>
-			<div class="conductor" ng-repeat="conductor in conductors">
-				<p>{{"wires_label" | translate}}: {{conductor.wires}}, {{"size_label" | translate}}: {{conductor.size}}, {{"insulation_label" | translate}}: {{conductor.insulation}}</p>
-				<span class="icon ion-ios-close" ng-click="removeConductor(conductor)"></span>
-				<div class="clearfix"></div>
+			<h3>{{"input_values_label" | translate}}</h3>
+			<div class="data-container">
+				<div class="item" ng-repeat="conductor in conductors">
+					<h6 class="item-label">{{"wires_label" | translate}}</h6>
+					<h6 class="item-label">{{"size_label" | translate}}</h6>
+					<h6 class="item-label">{{"insulation_label" | translate}}</h6>
+					<p class="item-data">{{conductor.wires}}</p>
+					<p class="item-data">{{conductor.size | translate}}</p>
+					<p class="item-data">{{conductor.insulation | translate}}</p>
+					<span class="icon ion-ios-close-outline" ng-click="removeConductor(conductor)"></span>
+					<div class="clearfix"></div>
+				</div>
 			</div>
-			<div class="clearfix"></div>
-			<h4>{{"total_area_label" | translate}}: {{currentArea}} {{"area_units" | translate}}<sup>2</sup></h4>
+			<h4>{{"total_area_label" | translate}}: {{currentArea | number : 4}} {{"area_units" | translate}}<sup>2</sup></h4>
 		</div>
 		<div class="form-item">
 			<p>2. {{"conduit_instruction_2" | translate}}</p>

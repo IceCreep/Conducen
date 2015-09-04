@@ -38,6 +38,10 @@ angular.module('app')
       //Conductor size
       $scope.conductorLength;
 
+      //Wire Size
+      $scope.wireSize;
+      $scope.wireSizes = voltageDrop.getWireSizes();
+
       //Error flags
       $scope.showZError = false;
       $scope.showRError = false;
@@ -46,10 +50,26 @@ angular.module('app')
 
       $scope.calculate = function(){
 
+        //z eficaz      z = Rcosθ + Xlsenθ
+        //Test case
+        // $scope.conductorMaterial = "cooper";
+        // $scope.conduitMaterial = "steel";
+        // $scope.powerFactor = 0.7;
+        // $scope.phase = 3;
+        // $scope.voltage = 480;
+        // $scope.voltageDrop = 2;
+        // $scope.ampacity = 150;
+        // $scope.conductorLength = 50;
+        // $scope.wireSize = "3/0";
+
         switch($scope.calculation){
 
           case "1":
             $scope.calculateConductorSize();
+          break;
+
+          case "2":
+            $scope.calculateCircuitDistance();
           break;
 
           default:
@@ -58,7 +78,8 @@ angular.module('app')
       },
 
       $scope.calculateConductorSize = function(){
-        //Warning: Needs to validate the form
+
+        //Validate the form
         if ($scope.conductorMaterial == null || $scope.conduitMaterial == null || $scope.phase == null ||  $scope.voltage == null 
           || $scope.powerFactor == null || $scope.calculation == null || $scope.ampacity == null || $scope.conductorLength == null) {
 
@@ -69,16 +90,76 @@ angular.module('app')
           $scope.showEmptyInputError = false;          
         }
 
-        //z eficaz      z = Rcosθ + Xlsenθ
-        //Test case
-        // $scope.conductorMaterial = "cooper";
-        // $scope.conduitMaterial = "pvc";
-        // $scope.powerFactor = 0.8;
-        // $scope.phase = 3;
-        // $scope.voltage = 480;
-        // $scope.voltageDrop = 3;
-        // $scope.ampacity = 200;
-        // $scope.conductorLength = 50;
+        var efficientZ = $scope.calculateEfficientZ();
+
+        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, $scope.conductorLength);
+        console.log("z " + z);
+
+        var result = voltageDrop.getSize(z, $scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor);
+        console.log("size " + result.size);   
+        
+        if(result.size != null){
+          voltageDrop.setInputData($scope.calculation-1, $scope.calculations[$scope.calculation-1].name, $scope.conductorMaterial, $scope.conduitMaterial, $scope.phase, $scope.voltage, $scope.voltageDrop, $scope.powerFactor, $scope.ampacity, $scope.conductorLength);
+          voltageDrop.setResultData(result);
+          $state.go('results', {"id": "voltage-drop"});
+
+          $scope.showCalculationError = false;
+        }else{
+          if(result.size == 0){
+            //Error: Data out of table
+            $scope.showCalculationError = true;
+
+            return;
+          }else{
+            //Error
+            $scope.showCalculationError = true;
+
+            return;
+          }
+        }  
+      },
+
+      $scope.calculateCircuitDistance = function(){
+        //Validate the form
+        if ($scope.conductorMaterial == null || $scope.conduitMaterial == null || $scope.phase == null ||  $scope.voltage == null 
+          || $scope.powerFactor == null || $scope.calculation == null || $scope.ampacity == null || $scope.wireSize == null) {
+
+          $scope.showEmptyInputError = true;
+
+          return;
+        }else{
+          $scope.showEmptyInputError = false;          
+        }
+
+        var efficientZ = voltageDrop.getEfficientZByWireSize($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, $scope.wireSize);
+        console.log("EfficientZByWireSize " + efficientZ.efficientZByWireSize);
+
+        if(efficientZ.efficientZByWireSize != null){
+          if(efficientZ.efficientZByWireSize != -1){
+            var result = {};
+            result.efficientZ = efficientZ.efficientZByWireSize;
+            result.conductorLength = voltageDrop.getConductorLength($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, efficientZ.efficientZByWireSize);
+            console.log("conductorLength " + result.conductorLength);
+
+            $scope.showCalculationError = false;
+
+            if (result.conductorLength!=null) {
+              voltageDrop.setInputData($scope.calculation-1, $scope.calculations[$scope.calculation-1].name, $scope.conductorMaterial, $scope.conduitMaterial, $scope.phase, $scope.voltage, $scope.voltageDrop, $scope.powerFactor, $scope.ampacity, $scope.wireSize);
+              voltageDrop.setResultData(result);
+              $state.go('results', {"id": "voltage-drop"});
+            }
+          }else{
+            //Error: Data out of table
+            $scope.showCalculationError = true;
+          }
+        }else{
+          //Error
+          $scope.showCalculationError = true;
+        }
+
+      },
+
+      $scope.calculateEfficientZ = function(){
 
         var r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, 0);
         console.log("r " + r);
@@ -103,31 +184,7 @@ angular.module('app')
           $scope.showZError = false;
         }
 
-        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, $scope.conductorLength);
-        console.log("z " + z);
-
-        var result = voltageDrop.getSize(z, $scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor);
-        console.log("size " + result.size);   
-        
-        if(result.size != null){
-          voltageDrop.setInputData($scope.calculations[$scope.calculation].name, $scope.conductorMaterial, $scope.conduitMaterial, $scope.phase, $scope.voltage, $scope.voltageDrop, $scope.powerFactor, $scope.ampacity, $scope.conductorLength);
-          voltageDrop.setResultData(result);
-          $state.go('results', {"id": "voltage-drop"});
-
-          $scope.showCalculationError = false;
-        }else{
-          if(result.size == 0){
-            //Error: Data out of table
-            $scope.showCalculationError = true;
-
-            return;
-          }else{
-            //Error
-            $scope.showCalculationError = true;
-
-            return;
-          }
-        }  
+        return efficientZ;
       }
      
     },

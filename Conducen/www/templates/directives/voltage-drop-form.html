@@ -80,9 +80,15 @@
 			</div>
 			<div class="form-item" ng-show="calculation==2">
 				<p>C. {{"voltage_drop_instruction_D" | translate}}</p>
-				<label class="item item-input">
-				    <input type="number" placeholder="{{'conductor_size_label' | translate}}" ng-model="conductorLength"></input>
-				</label>
+
+				<label class="item item-input item-select">
+				    <div class="input-label">
+				      {{"conductor_size_label" | translate}}
+				    </div>
+				    <select ng-model="wireSize">
+				      <option ng-repeat="size in wireSizes">{{size}}</option>
+				    </select>
+				 </label>
 			</div>
 		</fieldset>
 		<div class="form-item">

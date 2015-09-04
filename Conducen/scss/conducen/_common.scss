@@ -38,6 +38,10 @@
 	}
 }
 
+.border{
+	border: 1px solid #139f58;
+}
+
 img{
 	display: block;
 }
@@ -158,7 +162,7 @@ secondary-menu{
 				padding-left: 20px;
 
 				a{
-					width: 70%;
+					width: 80%;
 					color: #666666;
 					text-decoration: none;
 					font-size: 16px;
@@ -197,16 +201,18 @@ secondary-menu{
 	}
 }
 
-form, .popover{
+form{
 	margin: 19% auto 5%;
 	width: 90%;
 
 	fieldset{
-		border-color: #f0f0f0;
+		border-color: #DDDDDD;
+		border-radius: 5px;
 	}
 
 	.form-item{
 		margin-top: 15px;
+		font-family: "RobotoRegular", Verdana, Arial;
 
 		p{
 			color: #6d6e76;
@@ -229,31 +235,32 @@ form, .popover{
 		.error{
 			color: red;
 		}
-	}
 
-	.conductors-container{
-		color: #6d6e76;
-		margin-top: 15px;
-
-		h3, h4{
-			color: #6d6e76;
-		}
-
-		.conductor{
-			border-bottom: 1px solid #009e49;
-
+		&.custom{
 			p{
+				font-family: "RobotoRegular", Verdana, Arial;
 				float: left;
-				width: 95%;
-				margin-bottom: 0px;
-				margin-top: 10px;
+				width: 70%;
+				padding: 12px 0 0 15px;
+				margin-bottom: 0;
 			}
 
-			span{
-				float: left;
-				font-size: 16px;
-				color: #004522;
-				padding-top: 10px;
+			label{
+				width: 60%;
+
+				@media only screen and (min-device-width : 355px){
+					width: 30%;
+				}
+
+				input{
+					border-left: 1px solid #139f58;
+					padding: 0 0 0 15px;
+				}
+			}
+
+			.item{
+				border: none;
+				margin: 0;
 			}
 		}
 	}

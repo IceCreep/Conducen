@@ -25,15 +25,15 @@
               <p class="item-data">{{conductor.insulation | translate}}</p>
               <div class="clearfix"></div>
             </div>
-            <p class="top-label total">{{"total_area_label" | translate}}: {{conduitData.totalArea | number : 4}} {{"area_units" | translate}}</p>
+            <p class="top-label total">{{"total_area_label" | translate}}: {{conduitData.totalArea | number : 4}} {{"area_units" | translate}}<sup>2</sup></p>
           </div>
         </div>
         <div class="results-data">
+          <h3 class="border-bottom">{{"output_values_label" | translate}}:</h3>
           <h3>{{"conduit_fill_results" | translate}}: <span>{{"conduit_fill_disclaimer" | translate}}</span></h3>
           <p class="error" ng-hide="conduitResult.found">{{"conduit_fill_error_label" | translate}}</p>
           <div class="item">
-            <h6 class="item-label">{{"trade_size_label" | translate}}</h6>
-            <p class="item-data">{{conduitResult.trade}}" {{conduitData.conductorType}}</p>
+            <p class="item-data no-border">{{conduitResult.trade}}" {{conduitData.conductorType}}</p>
           </div>
           <div class="item">
             <h6 class="item-label">{{"metric_designator_label" | translate}}</h6>
@@ -44,8 +44,7 @@
           <h3>{{"nipple_results" | translate}}: <span>{{"nipple_results_disclaimer" | translate}}</span></h3>          
           <p class="error" ng-hide="nippleResult.found">{{"conduit_fill_error_label" | translate}}</p>
           <div class="item">
-            <h6 class="item-label">{{"trade_size_label" | translate}}</h6>
-            <p class="item-data">{{nippleResult.trade}}" {{conduitData.conductorType}}</p>
+            <p class="item-data no-border">{{nippleResult.trade}}" {{conduitData.conductorType}}</p>
           </div>
           <div class="item">
             <h6 class="item-label">{{"metric_designator_label" | translate}}</h6>
@@ -79,8 +78,10 @@
               <p class="item-data">{{voltageDropInputData.ampacity | translate}}</p>
 
               <h6 class="item-label">{{"voltage_drop_label" | translate}}</h6>
-              <h6 class="item-label">{{"length_label" | translate}}</h6>
+              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==0">{{"length_label" | translate}}</h6>
+              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==1">{{"conductor_size_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.voltageDrop | translate}}</p>
+              <!-- Here the conductorLength or wireSize is passed depending on the calculation type -->
               <p class="item-data">{{voltageDropInputData.conductorLength | translate}}</p>
               <div class="clearfix"></div>
             </div>
@@ -89,9 +90,13 @@
         <div class="results-data">
           <h3>{{"conductor_size_results" | translate}}:</h3>
           <p class="error" ng-show="voltageDropResult.size.error">{{"conduit_fill_error_label" | translate}}</p>
-          <div class="item">
+          <div class="item" ng-if="voltageDropInputData.calculationTypeIndex==0">
             <h6 class="item-label">{{"size_label" | translate}}</h6>
             <p class="item-data">{{voltageDropResult.size}} AWG</p>
+          </div>
+          <div class="item" ng-if="voltageDropInputData.calculationTypeIndex==1">
+            <h6 class="item-label">{{"size_label" | translate}}</h6>
+            <p class="item-data">{{voltageDropResult.conductorLength | number : 4}} m</p>
           </div>
           <div class="item">
             <h6 class="item-label">{{"efficient_z_label" | translate}}</h6>

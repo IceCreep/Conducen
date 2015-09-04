@@ -52,6 +52,7 @@
 				width: 80%;
 				margin: 0 auto;
 				border: 1px solid #DDDDDD;
+			    border-radius: 5px;
 
 				.item{
 					border: none;
@@ -101,6 +102,13 @@
 		.results-data{
 			padding-top: 20px;
 
+			h3{
+				&.border-bottom{
+					padding-bottom: 5px;
+					border-bottom: 1px solid #019d56;
+				}
+			}
+
 			.item{
 				border: none;
 				padding: 0px 0 5px;
@@ -118,11 +126,16 @@
 			.item-data{
 				width: 100%;
 				border-bottom: 1px solid #019d56;
-    			padding-bottom: 5px;
+    			padding-bottom: 2px;
     			color: #019d56;
     			font-size: 15px;
 				font-family: "RobotoRegular", Verdana, Arial;
 				text-transform: uppercase;
+				padding-left: 10px;
+
+				&.no-border{
+					border: none;
+				}
 			}
 		}
 
