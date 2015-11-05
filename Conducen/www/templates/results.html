@@ -6,6 +6,7 @@
 	  		<img ng-src="img/secondary/logo-{{state}}.png"/>
 	  		<h1 ng-if="state=='conduit'">{{"conduit_fill_label" | translate}}<br/><span>{{"calculator_label" | translate}}</span></h1>
         <h1 ng-if="state=='voltage-drop'">{{"voltage_drop_label" | translate}}<br/><span>{{"calculator_label" | translate}}</span></h1>
+        <h1 ng-if="state=='ampacity'">{{"ampacity_label" | translate}}<br/><span>{{"calculator_label" | translate}}</span></h1>
 	  		<div class="clearfix"></div>
 	  	</div>
   		<div class="curves top">
@@ -59,11 +60,11 @@
       <div class="results voltage-drop-results" ng-if="state=='voltage-drop'">
         <div class="input-data">
           <h3>{{"input_values_label" | translate}}:</h3>
-          <p class="top-label">{{"calculation_type_label" | translate}}: {{voltageDropInputData.calculationType}}</p>
+          <p class="top-label">{{"calculation_type_label" | translate}}: {{voltageDropInputData.calculationType | limitTo: 22}}</p>
           <div class="data-container">
             <div class="item data-row">
-              <h6 class="item-label no-margin">{{"conductor_label" | translate}}</h6>
-              <h6 class="item-label no-margin">{{"conduit_label" | translate}}</h6>
+              <h6 class="item-label no-margin">{{"conductor_material_short_label" | translate}}</h6>
+              <h6 class="item-label no-margin">{{"conduit_material_short_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.conductorMaterial | translate}}</p>
               <p class="item-data">{{voltageDropInputData.conduitMaterial | translate}}</p>
 
@@ -72,35 +73,85 @@
               <p class="item-data">{{voltageDropInputData.phase | translate}}</p>
               <p class="item-data">{{voltageDropInputData.voltage | translate}}</p>
 
-              <h6 class="item-label">{{"power_factor_label" | translate}}</h6>
-              <h6 class="item-label">{{"amperage_label" | translate}}</h6>
+              <h6 class="item-label">{{"power_factor_short_label" | translate}}</h6>
+              <h6 class="item-label">{{"amperage_small_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.powerFactor | translate}}</p>
               <p class="item-data">{{voltageDropInputData.ampacity | translate}}</p>
 
-              <h6 class="item-label">{{"voltage_drop_label" | translate}}</h6>
-              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==0">{{"length_label" | translate}}</h6>
-              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==1">{{"conductor_size_label" | translate}}</h6>
+              <h6 class="item-label">{{"voltage_drop_small_label" | translate}}</h6>
+              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==0">{{"circuit_distance_short_label" | translate}}</h6>
+              <h6 class="item-label" ng-if="voltageDropInputData.calculationTypeIndex==1">{{"conductor_size_short_label" | translate}}</h6>
               <p class="item-data">{{voltageDropInputData.voltageDrop | translate}}</p>
               <!-- Here the conductorLength or wireSize is passed depending on the calculation type -->
-              <p class="item-data">{{voltageDropInputData.conductorLength | translate}}</p>
+              <p class="item-data" ng-if="voltageDropInputData.calculationTypeIndex==0">{{voltageDropInputData.conductorLength}}</p>
+              <p class="item-data" ng-if="voltageDropInputData.calculationTypeIndex==1">{{voltageDropInputData.conductorLength}}</p>
               <div class="clearfix"></div>
             </div>
           </div>
         </div>
         <div class="results-data">
-          <h3>{{"conductor_size_results" | translate}}:</h3>
-          <p class="error" ng-show="voltageDropResult.size.error">{{"conduit_fill_error_label" | translate}}</p>
+          <h3 ng-if="voltageDropInputData.calculationTypeIndex==0">{{"conductor_size_results" | translate}}:</h3>
+          <h3 ng-if="voltageDropInputData.calculationTypeIndex==1">{{"conductor_length_results" | translate}}:</h3>
+          <p class="error" ng-show="voltageDropResult.error">{{"voltage_drop_error_6_label" | translate}}</p>
           <div class="item" ng-if="voltageDropInputData.calculationTypeIndex==0">
             <h6 class="item-label">{{"size_label" | translate}}</h6>
-            <p class="item-data">{{voltageDropResult.size}} AWG</p>
+            <p class="item-data no-border no-uppercase">{{voltageDropResult.size}} (75°C amps. Cu/Al)</p>
           </div>
           <div class="item" ng-if="voltageDropInputData.calculationTypeIndex==1">
-            <h6 class="item-label">{{"size_label" | translate}}</h6>
-            <p class="item-data">{{voltageDropResult.conductorLength | number : 4}} m</p>
+            <h6 class="item-label">{{"conductor_length_label" | translate}}</h6>
+            <p class="item-data no-border" ng-if="isLanguage('es')">{{voltageDropResult.conductorLength | number : 4}} {{"length_units" | translate}}</p>
+            <p class="item-data no-border" ng-if="isLanguage('en')">{{voltageDropResult.conductorLength | number : 4}} {{"length_units" | translate}}</p>
           </div>
           <div class="item">
             <h6 class="item-label">{{"efficient_z_label" | translate}}</h6>
-            <p class="item-data">{{voltageDropResult.efficientZ | number : 4}} ohmios/km al neutro</p>
+            <p class="item-data no-border no-uppercase" ng-if="isLanguage('es')">{{voltageDropResult.efficientZ | number : 4}} {{"ohm_distance_unit" | translate}}</p>
+            <p class="item-data no-border no-uppercase" ng-if="isLanguage('en')">{{voltageDropResult.efficientZ*0.3048 | number : 4}} {{"ohm_distance_unit" | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="results ampacity-results" ng-if="state=='ampacity'">
+        <div class="input-data">
+          <h3>{{"input_values_label" | translate}}:</h3>
+          <!-- <p class="top-label">{{"calculation_type_label" | translate}}: {{voltageDropInputData.calculationType | limitTo: 22}}</p> -->
+          <div class="data-container">
+            <div class="item data-row">
+              <h6 class="item-label no-margin">{{"wire_material_short_label" | translate}}</h6>
+              <h6 class="item-label no-margin">{{"conductor_type_short_label" | translate}}</h6>
+              <p class="item-data">{{ampacityInputData.wireMaterial | translate}}</p>
+              <p class="item-data">{{ampacityInputData.conductorType | translate}}</p>
+
+              <h6 class="item-label">{{"continuos_current_short_label" | translate}}</h6>
+              <h6 class="item-label">{{"non_continuos_current_short_label" | translate}}</h6>
+              <p class="item-data">{{ampacityInputData.continousCurrent}}</p>
+              <p class="item-data">{{ampacityInputData.nonContinousCurrent}}</p>
+
+              <h6 class="item-label">{{"terminal_temp_short_label" | translate}}</h6>
+              <h6 class="item-label">{{"ambient_temperature_short_label" | translate}}</h6>
+              <p class="item-data">{{ampacityInputData.terminalTemp}}</p>
+              <p class="item-data">{{ampacityInputData.ambientTemperature}}</p>
+
+              <h6 class="item-label lone-item">{{"current_conductors_short_label" | translate}}</h6>
+              <h6 class="item-label" style="opacity:0">{{"current_conductors_short_label" | translate}}</h6>
+              <p class="item-data lone-item">{{ampacityInputData.conductorsRange}}</p>
+              <p class="item-data" style="opacity:0">{{ampacityInputData.conductorsRange}}</p>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+        <div class="results-data">
+          <h3>{{"ampacity_results" | translate}}:</h3>
+          <!-- <p class="error" ng-show="voltageDropResult.error">{{"voltage_drop_error_6_label" | translate}}</p> -->
+          <div class="item">
+            <h6 class="item-label">{{"cb_label" | translate}}</h6>
+            <p class="item-data no-border no-uppercase">{{ampacityResult.cb}} A</p>
+          </div>
+          <div class="item">
+            <h6 class="item-label">{{ampacityResult.c_label}}</h6>
+            <p class="item-data no-border no-uppercase">{{ampacityResult.c}}</p>
+          </div>
+          <div class="item">
+            <h6 class="item-label">{{ampacityResult.c_num_label}}</h6>
+            <p class="item-data no-border no-uppercase">{{ampacityResult.c_num}}</p>
           </div>
         </div>
       </div>

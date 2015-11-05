@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('ResultsCtrl', ['$scope', 'dataAdapter', '$rootScope', '$window', '$stateParams', 'voltageDrop', function($scope, dataAdapter, $rootScope, $window, $stateParams, voltageDrop) {
+.controller('ResultsCtrl', ['$scope', 'dataAdapter', '$rootScope', '$window', '$stateParams', 'voltageDrop', '$translate', 'ampacity',  function($scope, dataAdapter, $rootScope, $window, $stateParams, voltageDrop, $translate, ampacity) {
 
     if ($stateParams.id!=null) {
         $scope.state = $stateParams.id;
@@ -15,6 +15,11 @@ angular.module('app')
     if($scope.state == "voltage-drop"){
         $scope.voltageDropInputData = voltageDrop.getInputData();
         $scope.voltageDropResult = voltageDrop.getResultData();
+    } 
+
+    if($scope.state == "ampacity"){
+        $scope.ampacityInputData = ampacity.getInputData();
+        $scope.ampacityResult = ampacity.getResultData();
     } 
 
     $rootScope.$on('$stateChangeStart', 
@@ -35,11 +40,24 @@ angular.module('app')
                     $scope.voltageDropInputData = voltageDrop.getInputData();
                     $scope.voltageDropResult = voltageDrop.getResultData();
                 } 
+
+                if($scope.state == "ampacity"){
+                    $scope.ampacityInputData = ampacity.getInputData();
+                    $scope.ampacityResult = ampacity.getResultData();
+                }
             }
 		});
 
     $scope.goBack = function(){
     	$window.history.back();
+    }
+
+    $scope.isLanguage = function(language){
+        if(language == $translate.use()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }]);
 

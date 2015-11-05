@@ -1,68 +1,75 @@
 <form>
 	<list>
-		<div class="conductors-container" ng-show="conductors.length">
-			<h3>{{"conductors_label" | translate}}</h3>
-			<div class="conductor" ng-repeat="conductor in conductors">
-				<p>{{"wires_label" | translate}}: {{conductor.wires}}, {{"size_label" | translate}}: {{conductor.size}}, {{"insulation_label" | translate}}: {{conductor.insulation}}</p>
-				<span class="icon ion-ios-close" ng-click="removeConductor(conductor)"></span>
-				<div class="clearfix"></div>
-			</div>
-			<div class="clearfix"></div>
-			<h4>{{"total_area_label" | translate}}: {{currentArea}} {{"area_units" | translate}}<sup>2</sup></h4>
+		<div class="form-item">
+			<p>1. {{"ampacity_instruction_1" | translate}}</p>
 		</div>
 		<div class="form-item">
-			<p>1. {{"conduit_instruction_1" | translate}}</p>
-		</div>
-		<fieldset>
-			<div class="form-item">
-				<p>A. {{"conduit_instruction_A" | translate}}</p>
-				<label class="item item-input">
-				    <input type="text" placeholder="{{'conductors_label' | translate}}" ng-model="currentConductor.wires"></input>
-				 </label>
-			</div>
-			<div class="form-item">
-				<p>B. {{"conduit_instruction_B" | translate}}</p>
-				<label class="item item-input item-select">
-				    <div class="input-label">
-				      {{"conductor_size_label" | translate}}
-				    </div>
-				    <select ng-model="currentConductor.size">
-				      <option ng-repeat="size in wireSizes">{{size}}</option>
-				    </select>
-				 </label>
-			</div>
-			<div class="form-item">
-				<p>C. {{"conduit_instruction_C" | translate}}</p>
-				<label class="item item-input item-select">
-				    <div class="input-label">
-				      {{"insulation_type_label" | translate}}
-				    </div>
-				    <select ng-model="currentConductor.insulation">
-				      <option ng-repeat="type in insulationTypes" value="{{type.type}}">{{type.type}}</option>
-				    </select>
-				 </label>
-			</div>
-			<div class="form-item">
-				<p>D. {{"conduit_instruction_D" | translate}}</p>
-				<button class="green-bg full-width" ng-click="addConductor(currentConductor)">
-					<span class="icon ion-plus-round"></span>
-					<span class="label">{{"add_label" | translate}}</span>
-				</button>
-			</div>
-		</fieldset>
-		<div class="form-item">
-			<p>2. {{"conduit_instruction_2" | translate}}</p>
 			<label class="item item-input item-select">
 			    <div class="input-label">
-			      {{"conduit_type_label" | translate}}
+			      {{"wire_material_label" | translate}}
 			    </div>
-			    <select ng-model="currentConductorType">
-			      <option ng-repeat="type in conduitTypes" value="{{type.type}}">{{type.name}}</option>
+			    <select ng-model="wireMaterial">
+			      <option ng-repeat="material in wireMaterials" value="{{material.type}}">{{material.name}}</option>
 			    </select>
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>3. {{"conduit_instruction_3" | translate}}</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"conductor_type_label" | translate}}
+			    </div>
+			    <select ng-model="conductorType">
+			      <option ng-repeat="conductor in conductorTypes" value="{{conductor.tc}}">{{conductor.tc | uppercase}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<label class="item item-input">
+			    <input type="number" placeholder="{{'continuos_current_label' | translate}}" ng-model="continousCurrent"></input>
+			 </label>
+		</div>
+		<div class="form-item">
+			<label class="item item-input">
+			    <input type="number" placeholder="{{'non_continuos_current_label' | translate}}" ng-model="nonContinousCurrent"></input>
+			 </label>
+		</div>
+		<div class="form-item">
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"terminal_temp_label" | translate}}
+			    </div>
+			    <select ng-model="terminalTemp">
+			      <option ng-repeat="terminalTemp in terminalTemps" value="{{terminalTemp.type}}">{{terminalTemp.name | uppercase}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"ambient_temperature_label" | translate}}
+			    </div>
+			    <select ng-model="ambientTemperature">
+			      <option ng-repeat="ambientTemperature in ambientTemps" value="{{ambientTemperature.type}}">{{ambientTemperature.name | uppercase}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<label class="item item-input item-select">
+			    <div class="input-label">
+			      {{"current_conductors_label" | translate}}
+			    </div>
+			    <select ng-model="conductorsRange">
+			      <option ng-repeat="conductorsRange in conductorsRanges" value="{{conductorsRange.type}}">{{conductorsRange.name | uppercase}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showCBError">* {{"cb_error_label" | translate}}</p>
+		</div>
+		<div class="form-item">
+			<p class="error" ng-show="showInputError">* {{"ampacity_error_1_label" | translate}}</p>
+		</div>
+		<div class="form-item">
 			<button class="green-bg full-width" ng-click="calculate()">
 				<span class="icon ion-ios-calculator"></span>
 				<span class="label">{{"calculate_label" | translate}}</span>
@@ -70,5 +77,4 @@
 		</div>
 	</list>
 	<div class="clearfix"></div>
-	
 </form>

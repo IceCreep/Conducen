@@ -1,0 +1,68 @@
+angular.module('app')
+.factory('tableA3', function TableA3Factory() {
+
+  return {
+    data: [
+      {
+        "c":"21-25",
+        "f":"70-77",
+        "copper_60":1.08,
+        "copper_75":1.05,
+        "copper_90":1.04,
+        "aluminum_60":1.08,
+        "aluminum_75":1.05,
+        "aluminum_90":1.04
+      },
+      {
+        "c":"26-30",
+        "f":"78-86",
+        "copper_60":1,
+        "copper_75":1,
+        "copper_90":1,
+        "aluminum_60":1,
+        "aluminum_75":1,
+        "aluminum_90":1
+      },
+      {
+        "c":"31-35",
+        "f":"87-95",
+        "copper_60":0.91,
+        "copper_75":0.94,
+        "copper_90":0.96,
+        "aluminum_60":0.91,
+        "aluminum_75":0.94,
+        "aluminum_90":0.96
+      },
+      {
+        "c":"36-40",
+        "f":"96-104",
+        "copper_60":0.82,
+        "copper_75":0.88,
+        "copper_90":0.91,
+        "aluminum_60":0.82,
+        "aluminum_75":0.88,
+        "aluminum_90":0.91
+      },
+      {
+        "c":"41-45",
+        "f":"105-113",
+        "copper_60":0.71,
+        "copper_75":0.82,
+        "copper_90":0.87,
+        "aluminum_60":0.71,
+        "aluminum_75":0.82,
+        "aluminum_90":0.87
+      },
+      {
+        "c":"46-50",
+        "f":"114-122",
+        "copper_60":0.58,
+        "copper_75":0.75,
+        "copper_90":0.82,
+        "aluminum_60":0.58,
+        "aluminum_75":0.75,
+        "aluminum_90":0.82
+      }
+    ]
+  }
+});

@@ -6,18 +6,48 @@ angular.module('app')
 	var resultData;
 
 	return {
+		getMaterialsByType: function(type){
+
+			var result;
+
+	    	if ($translate.use()=="en") {
+
+	    		result = type;
+		    }else{
+		    	switch(type){
+	    			case "copper":
+	    				result = "Cobre";
+	    			break;
+
+	    			case "aluminum":
+	    				result = "Aluminio";
+	    			break;
+
+	    			case "steel":
+	    				result = "Acero";
+	    			break;
+	    		}
+		    }
+
+		    if(type == "pvc"){
+		    	result = "PVC";
+		    }
+
+		    return result;
+	    },
+
 	    getConductorMaterials: function(){
 	    	if ($translate.use()=="en") {
 		        return [
 			        {
-			          "name" : "Cooper",
+			          "name" : "Copper",
 			          "id" : "1",
-			          "type" : "cooper"
+			          "type" : "copper"
 			        },
 			        {
-			          "name" : "Aluminium",
+			          "name" : "Aluminum",
 			          "id" : "2",
-			          "type" : "aluminium"
+			          "type" : "aluminum"
 			        }
 		        ];
 		    }else{
@@ -25,12 +55,12 @@ angular.module('app')
 			        {
 			          "name" : "Cobre",
 			          "id" : "1",
-			          "type" : "cooper"
+			          "type" : "copper"
 			        },
 			        {
 			          "name" : "Aluminio",
 			          "id" : "2",
-			          "type" : "aluminium"
+			          "type" : "aluminum"
 			        }
 		        ];
 		    }
@@ -40,14 +70,14 @@ angular.module('app')
 	    	if ($translate.use()=="en") {
 		        return [
 			        {
-			          "name" : "Conduit PVC",
+			          "name" : "PVC",
 			          "id" : "1",
 			          "type" : "pvc"
 			        },
 			        {
-			          "name" : "Aluminium",
+			          "name" : "Aluminum",
 			          "id" : "2",
-			          "type" : "aluminium"
+			          "type" : "aluminum"
 			        },
 			        {
 			          "name" : "Steel",
@@ -58,14 +88,14 @@ angular.module('app')
 		    }else{
 		    	return [
 			        {
-			          "name" : "Conduit PVC",
+			          "name" : "PVC",
 			          "id" : "1",
 			          "type" : "pvc"
 			        },
 			        {
 			          "name" : "Aluminio",
 			          "id" : "2",
-			          "type" : "aluminium"
+			          "type" : "aluminum"
 			        },
 			        {
 			          "name" : "Acero",
@@ -80,7 +110,7 @@ angular.module('app')
 	    	if ($translate.use()=="en") {
 		        return [
 			        {
-			          "name" : "Single Phase",
+			          "name" : "One Phase",
 			          "id" : "1"
 			        },
 			        {
@@ -102,6 +132,26 @@ angular.module('app')
 		    }
 	    },
 
+	    getPhasesById: function(id){
+	    	var result;
+
+	    	if ($translate.use()=="en") {
+		        if(id==1){
+		        	result = "One Phase"
+		        }else{
+		        	result = "Three Phase"
+		        }
+		    }else{
+		    	if(id==1){
+		        	result = "Monofásico"
+		        }else{
+		        	result = "Trifásico"
+		        }
+		    }
+
+		    return result;
+	    },
+
 	    getCalculations: function(){
 	    	if ($translate.use()=="en") {
 		        return [
@@ -110,18 +160,18 @@ angular.module('app')
 			          "id" : "1"
 			        },
 			        {
-			          "name" : "Circuit Distance",
+			          "name" : "Circuit Distance (feet)",
 			          "id" : "2"
 			        }
 		        ];
 		    }else{
 		    	return [
 			        {
-			          "name" : "Calibre del Conductor",
+			          "name" : "Calibre del Conductor (AWG o kcmil)",
 			          "id" : "1"
 			        },
 			        {
-			          "name" : "Longitud Máxima",
+			          "name" : "Longitud Max. (m)",
 			          "id" : "2"
 			        }
 		        ];
@@ -180,8 +230,13 @@ angular.module('app')
 	    	var efficientZ = -1;
 	    	var item;
 	    	var result = -1;
+	    	var initialIndex = 0;
 
-	    	for (var i = 0; i < table9A.data.length; i++) {
+	    	if (conductor == "aluminum") {
+	    		initialIndex = 1;
+	    	};
+
+	    	for (var i = initialIndex; i < table9A.data.length; i++) {
 	    		item = table9A.data[i];
 
 	    		efficientZ = this.getEfficientZ(conductor, conduit, powerFactor, i);
@@ -191,10 +246,12 @@ angular.module('app')
 	    		}else{
 	    			result = item.size;
 
-	    			return { 
-	    				"size" : result,
-	    				"efficientZ" : efficientZ,
-	    				"error" : null
+	    			if (efficientZ>0) {
+		    			return { 
+		    				"size" : result,
+		    				"efficientZ" : efficientZ,
+		    				"error" : null
+		    			};
 	    			};
 	    		}
 	    	}
@@ -239,9 +296,9 @@ angular.module('app')
 	    	inputData = {
 	    		"calculationTypeIndex" : calculationTypeIndex,
 	    		"calculationType" : calculationType,
-	    		"conductorMaterial" : conductorMaterial,
-	    		"conduitMaterial" : conduitMaterial,
-	    		"phase" : phase,
+	    		"conductorMaterial" : this.getMaterialsByType(conductorMaterial),
+	    		"conduitMaterial" : this.getMaterialsByType(conduitMaterial),
+	    		"phase" : this.getPhasesById(phase),
 	    		"voltage" : voltage,
 	    		"voltageDrop" : voltageDrop,
 	    		"powerFactor" : powerFactor,
@@ -265,7 +322,7 @@ angular.module('app')
 	    //For getting the Maximum Circuit Distance
 	    getWireSizes: function(){
 	    	return [
-		        14, 12, 10, 8, 6, 4, 3, 2, 1, "1/0", "2/0", "3/0", "4/0", 250, 300, 350, 400, 500, 600, 700, 750, 1000
+		        "14 AWG (20/-- amps.)", "12 AWG (25/20 amps.)", "10 AWG (35/30 amps.)", "8 AWG (50/40 amps.)", "6 AWG (65/50 amps.)", "4 AWG (85/65 amps.)", "3 AWG (100/75 amps.)", "2 AWG (115/90 amps.)", "1 AWG (130/100 amps.)", "1/0 AWG (150/120 amps.)", "2/0 AWG (175/135 amps.)", "3/0 AWG (200/155 amps.)", "4/0 AWG (230/180 amps.)", "250 kcmil (255/205 amps.)", "300 kcmil (285/230 amps.)", "350 kcmil (310/250 amps.)", "400 kcmil (335/270 amps.)", "500 kcmil (380/310 amps.)", "600 kcmil (420/340 amps.)", "750 kcmil (475/385 amps.)", "1000 kcmil (545/445 amps.)"
 		    ];
 	    }
 	};

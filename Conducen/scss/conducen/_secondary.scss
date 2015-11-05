@@ -64,6 +64,10 @@
 						color: #6d6e76;
 						font-size: 14px;
 						font-family: "RobotoRegular", Verdana, Arial;
+
+						&.lone-item{
+							width: 100%;
+						}
 					}
 
 					.item-data{
@@ -76,6 +80,10 @@
 		    			font-size: 14px;
 						font-family: "RobotoRegular", Verdana, Arial;
 						text-transform: uppercase;
+
+						&.lone-item{
+							width: 100%;
+						}
 					}
 
 					&.data-row{
@@ -135,6 +143,10 @@
 
 				&.no-border{
 					border: none;
+				}
+
+				&.no-uppercase{
+					text-transform: none;
 				}
 			}
 		}

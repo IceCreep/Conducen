@@ -7793,7 +7793,8 @@ secondary-menu {
         border: 1px solid #139f58;
         height: 100%;
         min-height: 50px;
-        padding-left: 20px; }
+        padding-left: 15px;
+        overflow: hidden; }
         .toggle-menu .menu-container .options li a {
           width: 80%;
           color: #666666;
@@ -7859,6 +7860,9 @@ form {
   form .ion-ios-calculator {
     font-size: 18px;
     padding: 7px 15px; }
+
+.icon.ion-trash-b {
+  font-size: 17px; }
 
 .home {
   min-height: 100%; }
@@ -8014,6 +8018,8 @@ form {
         padding-left: 10px; }
         .secondary-page .results .results-data .item-data.no-border {
           border: none; }
+        .secondary-page .results .results-data .item-data.no-uppercase {
+          text-transform: none; }
     .secondary-page .results h3 span {
       font-size: 14px;
       display: block; }

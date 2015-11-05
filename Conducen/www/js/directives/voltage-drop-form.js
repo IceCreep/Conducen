@@ -5,62 +5,92 @@ angular.module('app')
     scope: {
       
     },
-    controller: function($scope, $rootScope, $state, $translate) {
+    controller: function($scope, $rootScope, $state, $translate, $ionicScrollDelegate) {
 
-      //Conductor materials
-      $scope.conductorMaterial;
-      $scope.conductorMaterials = voltageDrop.getConductorMaterials();
+      $scope.init = function(){
+          //Conductor materials
+        $scope.conductorMaterials = voltageDrop.getConductorMaterials();
 
-      //Conduit Materials
-      $scope.conduitMaterial;
-      $scope.conduitMaterials = voltageDrop.getConduitMaterials();
+        //Conduit Materials
+        $scope.conduitMaterials = voltageDrop.getConduitMaterials();
 
-      //Phases
-      $scope.phase;
-      $scope.phases = voltageDrop.getPhases();
+        //Phases
+        $scope.phases = voltageDrop.getPhases();
 
-      //Voltage
-      $scope.voltage;
+        //Type of calculations
+        $scope.calculations = voltageDrop.getCalculations();
 
-      //Power Factor
-      $scope.powerFactor;
+        //Wire Sizes
+        $scope.wireSizes = voltageDrop.getWireSizes();
 
-      //Type of calculation
-      $scope.calculation;
-      $scope.calculations = voltageDrop.getCalculations();
+        //Clear fields
+        $scope.clear();
 
-      //Amperage
-      $scope.ampacity;
+        //Pull again all the field info after a change of language option
+        $rootScope.$on('$stateChangeSuccess', 
+          function(event, toState, toParams, fromState, fromParams){
+            if (toState.name == "voltage-drop") {
+              $scope.init();
+            };
+          });
+      }
 
-      //Voltage drop
-      $scope.voltageDrop;
 
-      //Conductor size
-      $scope.conductorLength;
+      $scope.clear = function(){
 
-      //Wire Size
-      $scope.wireSize;
-      $scope.wireSizes = voltageDrop.getWireSizes();
+        $ionicScrollDelegate.scrollTop(true);
 
-      //Error flags
-      $scope.showZError = false;
-      $scope.showRError = false;
-      $scope.showCalculationError = false;
-      $scope.showEmptyInputError = false;
+        //Conductor materials
+        $scope.conductorMaterial = null;
+
+        //Conduit Materials
+        $scope.conduitMaterial = null;
+
+        //Phases
+        $scope.phase = null;
+
+        //Voltage
+        $scope.voltage = null;
+
+        //Power Factor
+        $scope.powerFactor = null;
+
+        //Type of calculation
+        $scope.calculation = null;
+
+        //Amperage
+        $scope.ampacity = null;
+
+        //Voltage drop
+        $scope.voltageDrop = null;
+
+        //Conductor size
+        $scope.conductorLength = null;
+
+        //Wire Size
+        $scope.wireSize = null;
+
+        //Error flags
+        $scope.showZError = false;
+        $scope.showRError = false;
+        $scope.showCalculationError = false;
+        $scope.showEmptyInputError = false;
+        $scope.powerFactorError = false;
+      },
 
       $scope.calculate = function(){
 
         //z eficaz      z = Rcosθ + Xlsenθ
         //Test case
-        // $scope.conductorMaterial = "cooper";
+        // $scope.conductorMaterial = "aluminum";
         // $scope.conduitMaterial = "steel";
-        // $scope.powerFactor = 0.7;
-        // $scope.phase = 3;
+        // $scope.powerFactor = 0.8;
+        // $scope.phase = 1;
         // $scope.voltage = 480;
-        // $scope.voltageDrop = 2;
-        // $scope.ampacity = 150;
-        // $scope.conductorLength = 50;
-        // $scope.wireSize = "3/0";
+        // $scope.voltageDrop = 3;
+        // $scope.ampacity = 200;
+        // $scope.conductorLength = 100;
+        // $scope.wireSize = "3/0 AWG (200/155 amps.)";
 
         switch($scope.calculation){
 
@@ -85,14 +115,47 @@ angular.module('app')
 
           $scope.showEmptyInputError = true;
 
+          if ($scope.powerFactor==undefined) {
+            $scope.powerFactorError = true;
+          }else{
+            if($scope.powerFactor <=0 || $scope.powerFactor >1){
+              $scope.powerFactorError = true;            
+            }else{
+              $scope.powerFactorError = false;           
+            }
+          }
+
           return;
         }else{
-          $scope.showEmptyInputError = false;          
+            $scope.showEmptyInputError = false;          
         }
+
+        if ($scope.powerFactor==undefined) {
+          $scope.powerFactorError = true;
+        }else{
+          if($scope.powerFactor <=0 || $scope.powerFactor >1){
+            $scope.powerFactorError = true;            
+          }else{
+            $scope.powerFactorError = false;           
+          }
+        }
+
+        // $scope.powerFactor = parseInt(String($scope.powerFactor).replace(",","."));
 
         var efficientZ = $scope.calculateEfficientZ();
 
-        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, $scope.conductorLength);
+        if (efficientZ == undefined) {
+          return;
+        };
+
+        var conductorLength = $scope.conductorLength;
+
+        //If it's in english convert from feet to meters
+        if ($translate.use()=="en") {
+          conductorLength = conductorLength / 3.280839895;
+        }
+
+        var z = voltageDrop.getZ($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, conductorLength);
         console.log("z " + z);
 
         var result = voltageDrop.getSize(z, $scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor);
@@ -126,9 +189,29 @@ angular.module('app')
 
           $scope.showEmptyInputError = true;
 
+          if ($scope.powerFactor==undefined) {
+            $scope.powerFactorError = true;
+          }else{
+            if($scope.powerFactor <=0 || $scope.powerFactor >1){
+              $scope.powerFactorError = true;            
+            }else{
+              $scope.powerFactorError = false;           
+            }
+          }
+
           return;
         }else{
-          $scope.showEmptyInputError = false;          
+            $scope.showEmptyInputError = false;          
+        }
+
+        if ($scope.powerFactor==undefined) {
+          $scope.powerFactorError = true;
+        }else{
+          if($scope.powerFactor <=0 || $scope.powerFactor >1){
+            $scope.powerFactorError = true;            
+          }else{
+            $scope.powerFactorError = false;           
+          }
         }
 
         var efficientZ = voltageDrop.getEfficientZByWireSize($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, $scope.wireSize);
@@ -139,6 +222,11 @@ angular.module('app')
             var result = {};
             result.efficientZ = efficientZ.efficientZByWireSize;
             result.conductorLength = voltageDrop.getConductorLength($scope.phase, $scope.voltageDrop, $scope.voltage, $scope.ampacity, efficientZ.efficientZByWireSize);
+            
+            if ($translate.use()=="en") {
+              result.conductorLength = result.conductorLength * 3.280839895;
+            }
+
             console.log("conductorLength " + result.conductorLength);
 
             $scope.showCalculationError = false;
@@ -161,22 +249,40 @@ angular.module('app')
 
       $scope.calculateEfficientZ = function(){
 
-        var r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, 0);
-        console.log("r " + r);
-        if(r == "" || r <= 0 || r ==null){
-            $scope.showRError = true;
+        var index = 0;
 
-            return;
+        var r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, index);
+        if(r == "" || r <= 0 || r ==null || r==undefined){
+
+            index ++;
+            r = voltageDrop.getR($scope.conductorMaterial, $scope.conduitMaterial, index);
+
+            if(r == "" || r <= 0 || r ==null || r==undefined){
+                $scope.showRError = true;
+
+                return;
+            }else{
+                $scope.showRError = false;
+            }
         }else{
             $scope.showRError = false;
         }
 
-        var xl = voltageDrop.getXL($scope.conduitMaterial, 0);
+        console.log("r " + r);
+
+        var xl = voltageDrop.getXL($scope.conduitMaterial, index);
         console.log("xl " + xl);
 
-        var efficientZ = voltageDrop.getEfficientZ($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, 0);
+        var efficientZ = voltageDrop.getEfficientZ($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, index);
 
-        if (efficientZ <=0 || efficientZ == null) {
+        console.log("efficientZ " + efficientZ);
+
+        if (efficientZ==0) {
+          index++;
+          efficientZ = voltageDrop.getEfficientZ($scope.conductorMaterial, $scope.conduitMaterial, $scope.powerFactor, index);
+        };
+
+        if (efficientZ <0 || efficientZ == null) {
           $scope.showZError = true;
 
           return;
@@ -185,7 +291,9 @@ angular.module('app')
         }
 
         return efficientZ;
-      }
+      },
+
+      $scope.init();
      
     },
     templateUrl: 'templates/directives/voltage-drop-form.html',

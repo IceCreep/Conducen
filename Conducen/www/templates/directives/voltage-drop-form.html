@@ -4,6 +4,17 @@
 			<p>1. {{"voltage_drop_instruction_1" | translate}}</p>
 			<label class="item item-input item-select">
 			    <div class="input-label">
+			      {{"calculation_type_short_label" | translate}}
+			    </div>
+			    <select ng-model="calculation">
+			      <option ng-repeat="calculation in calculations" value="{{calculation.id}}">{{calculation.name}}</option>
+			    </select>
+			 </label>
+		</div>
+		<div class="form-item">
+			<p>2. {{"voltage_drop_instruction_2" | translate}}</p>
+			<label class="item item-input item-select">
+			    <div class="input-label">
 			      {{"conductor_material_label" | translate}}
 			    </div>
 			    <select ng-model="conductorMaterial">
@@ -12,7 +23,6 @@
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>2. {{"voltage_drop_instruction_2" | translate}}</p>
 			<label class="item item-input item-select">
 			    <div class="input-label">
 			      {{"conduit_material_label" | translate}}
@@ -23,10 +33,9 @@
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>3. {{"voltage_drop_instruction_3" | translate}}</p>
 			<label class="item item-input item-select">
 			    <div class="input-label">
-			      {{"phase_label" | translate}}
+			      {{"phase_help_label" | translate}}
 			    </div>
 			    <select ng-model="phase">
 			      <option ng-repeat="phase in phases" value="{{phase.id}}">{{phase.name}}</option>
@@ -34,56 +43,40 @@
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>4. {{"voltage_drop_instruction_4" | translate}}</p>
 			<label class="item item-input">
-			    <input type="number" placeholder="{{'voltage_label' | translate}}" ng-model="voltage"></input>
+			    <input type="number" placeholder="{{'voltage_help_label' | translate}}" ng-model="voltage"></input>
 			 </label>
 		</div>
 		<div class="form-item">
-			<p>5. {{"voltage_drop_instruction_5" | translate}}</p>
 			<label class="item item-input">
-			    <input type="number" placeholder="{{'power_factor_label' | translate}}" ng-model="powerFactor"></input>
+			    <input type="number" placeholder="{{'power_factor_help_label' | translate}}" ng-model="powerFactor"></input>
 			</label>
 		</div>
-		<div class="form-item">
-			<p>6. {{"voltage_drop_instruction_6" | translate}}</p>
-			<label class="item item-input item-select">
-			    <div class="input-label">
-			      {{"calculation_type_label" | translate}}
-			    </div>
-			    <select ng-model="calculation">
-			      <option ng-repeat="calculation in calculations" value="{{calculation.id}}">{{calculation.name}}</option>
-			    </select>
-			 </label>
-		</div>
+		
 		<div class="form-item" ng-show="calculation!=null">
-			<p>7. {{"voltage_drop_instruction_7" | translate}}</p>
+			<p ng-show="calculation==1">3. {{"voltage_drop_instruction_3A" | translate}}</p>
+			<p ng-show="calculation==2">3. {{"voltage_drop_instruction_3B" | translate}}</p>
 		</div>
 		<fieldset ng-show="calculation!=null">
 			<div class="form-item" ng-show="calculation==1 || calculation==2">
-				<p>A. {{"voltage_drop_instruction_A" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'amperage_label' | translate}}" ng-model="ampacity"></input>
+				    <input type="number" placeholder="{{'amperage_help_label' | translate}}" ng-model="ampacity"></input>
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==1 || calculation==2">
-				<p>B. {{"voltage_drop_instruction_B" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'voltage_drop_label' | translate}}" ng-model="voltageDrop"></input>
+				    <input type="number" placeholder="{{'voltage_drop_percentage_label' | translate}}" ng-model="voltageDrop"></input>
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==1">
-				<p>C. {{"voltage_drop_instruction_C" | translate}}</p>
 				<label class="item item-input">
-				    <input type="number" placeholder="{{'conductor_length_label' | translate}}" ng-model="conductorLength"></input>
+				    <input type="number" placeholder="{{'circuit_length_help_label' | translate}}" ng-model="conductorLength"></input>
 				</label>
 			</div>
 			<div class="form-item" ng-show="calculation==2">
-				<p>C. {{"voltage_drop_instruction_D" | translate}}</p>
-
 				<label class="item item-input item-select">
 				    <div class="input-label">
-				      {{"conductor_size_label" | translate}}
+				      {{"conductor_size_help_label" | translate}}
 				    </div>
 				    <select ng-model="wireSize">
 				      <option ng-repeat="size in wireSizes">{{size}}</option>
@@ -103,11 +96,21 @@
 		<div class="form-item">
 			<p class="error" ng-show="showRError">* {{"voltage_drop_error_4_label" | translate}}</p>
 		</div>
+		<div class="form-item">
+			<p class="error" ng-show="powerFactorError">* {{"voltage_drop_error_5_label" | translate}}</p>
+		</div>
 		<div class="form-item" ng-show="calculation!=null">
-			<p>8. {{"conduit_instruction_3" | translate}}</p>
+			<p ng-show="calculation==1">4. {{"voltage_drop_instruction_4A" | translate}}</p>
+			<p ng-show="calculation==2">4. {{"voltage_drop_instruction_4B" | translate}}</p>
 			<button class="green-bg full-width" ng-click="calculate()">
 				<span class="icon ion-ios-calculator"></span>
 				<span class="label">{{"calculate_label" | translate}}</span>
+			</button>
+		</div>
+		<div class="form-item" ng-show="calculation!=null">
+			<button class="green-bg full-width" ng-click="clear()">
+				<span class="icon ion-trash-b"></span>
+				<span class="label">{{"clear_label" | translate}}</span>
 			</button>
 		</div>
 	</list>
