@@ -2,12 +2,13 @@ angular.module('app')
 .directive('ampacityForm', ['dataAdapter', 'ampacity', function(dataAdapter, ampacity) {
   return {
     restrict: "E",
-    scope: {
-      
-    },
     controller: function($scope, $rootScope, $state, $translate, $ionicScrollDelegate) {
 
+      $scope.initialized = false;
+
       $scope.init = function(){
+
+        $scope.initialized = true;
 
         //Wire materials
         $scope.wireMaterials = ampacity.getWireMaterials();
@@ -27,11 +28,24 @@ angular.module('app')
         $scope.clear();
 
         //Pull again all the field info after a change of language option
-        $rootScope.$on('$stateChangeSuccess', 
+        var listener = $rootScope.$on('$stateChangeSuccess', 
           function(event, toState, toParams, fromState, fromParams){
-            if (toState.name == "ampacity") {
-              $scope.init();
-            };
+
+            if(fromParams.id == "ampacity" && fromState.name == "results" && toState.name == "ampacity"){
+              if ($scope.initialized == false) {
+                // console.log("Must fill with results data");
+              }
+
+            }else{
+              if(fromState.name == "ampacity" && toState.name == "results"){
+                // console.log("Not Clean");
+              }else{
+                // console.log("Must Clean");
+                $scope.clear();
+                $scope.initialized = false;
+              }
+            }
+
           });
       }
 
@@ -72,6 +86,7 @@ angular.module('app')
         $scope.fcr = null;
         $scope.atar = null;
         $scope.c2 = null;
+        $scope.c2Index = null;
         $scope.c2Num = null;
         $scope.ata = null;
         $scope.acu = null;
@@ -84,11 +99,11 @@ angular.module('app')
         //For testing
         // $scope.wireMaterial = "copper";
         // $scope.conductorType = "thhn";
-        // $scope.continousCurrent = 0;
-        // $scope.nonContinousCurrent = 600;
+        // $scope.continousCurrent = 400;
+        // $scope.nonContinousCurrent = 110;
         // $scope.terminalTemp = 75;
-        // $scope.ambientTemperature = "21-25";
-        // $scope.conductorsRange = 1.0;
+        // $scope.ambientTemperature = "36-40";
+        // $scope.conductorsRange = 0.80;
 
         // $scope.wireMaterial = "aluminum";
         // $scope.conductorType = "xhhw-2";
@@ -116,11 +131,14 @@ angular.module('app')
         console.log("AC " + $scope.ac);
 
         var cbResult = $scope.calculateCB($scope.ac);
+        if(cbResult.cb == null){
+          return;
+        }
         $scope.cb = cbResult.cb;
         $scope.c1 = cbResult.size;
         $scope.c1Num = cbResult.conductors;
 
-        $scope.conductorTa = ampacity.getConductorTa($scope.conductorType, $scope.conductorTypes);
+        $scope.conductorTa = ampacity.getConductorTa($scope.conductorType);
 
         $scope.fc = ampacity.getFC($scope.ambientTemperature, $scope.wireMaterial, $scope.conductorTa);
         console.log("FC " + $scope.fc);
@@ -130,7 +148,7 @@ angular.module('app')
 
          if($scope.ft == 1){
             //TODO: Show results for CB, C1 and #C1
-            ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, $scope.ambientTemperature, $scope.conductorsRange);
+            ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, ampacity.getAmbientTempsByRange($scope.ambientTemperature), ampacity.getConductorsRangesByValue($scope.conductorsRange));
             
             var wireSize;
             if($scope.c1>=250){
@@ -175,10 +193,9 @@ angular.module('app')
 
         }else{
 
-          $scope.cb1 = $scope.cb;
+          var isCycling = false;
 
-          do{
-            //Abnormal Conditions
+          //Abnormal Conditions
             console.log("Cycling... " + $scope.cb1);
             $scope.fcb = $scope.cb / $scope.c1Num;
             console.log("Phase B FCB " + $scope.fcb);
@@ -195,8 +212,15 @@ angular.module('app')
             //Cycle
             var c2Result = ampacity.getC2($scope.wireMaterial, $scope.conductorTa, $scope.atar);
 
+          do{
+            
+            if(isCycling){
+              c2Result = ampacity.getC2ByIndex($scope.wireMaterial, $scope.conductorTa, $scope.c2Index);
+            }
+
             $scope.c2 = c2Result.c2;
             $scope.ata = c2Result.ata;
+            $scope.c2Index = c2Result.index;
 
             console.log("Phase B C2 " + $scope.c2);
             console.log("Phase B ATA " + $scope.ata);
@@ -205,6 +229,9 @@ angular.module('app')
             console.log("Phase B ACU " + $scope.acu);
 
             var cbResult = $scope.calculateCB($scope.acu);
+            if(cbResult.cb == null){
+              return;
+            }
             $scope.cb1 = Math.ceil(cbResult.cb);
             $scope.c2Num = cbResult.conductors;
 
@@ -212,8 +239,12 @@ angular.module('app')
             console.log("C2Num " + $scope.c2Num);
             console.log("C2 " + $scope.c2);
 
+            isCycling = true;
+            $scope.c2Index++;
 
           }while($scope.cb1 < $scope.fcb);
+
+          isCycling = false;
 
           $scope.goToCompareC2();
         }
@@ -269,7 +300,7 @@ angular.module('app')
           $scope.c3Num = Math.ceil($scope.ac/$scope.acu);
         }
 
-        ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, $scope.ambientTemperature, $scope.conductorsRange);
+        ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, ampacity.getAmbientTempsByRange($scope.ambientTemperature), ampacity.getConductorsRangesByValue($scope.conductorsRange));
         
         var wireSize;
         if($scope.c3>=250){
@@ -298,7 +329,7 @@ angular.module('app')
           $scope.c2 = $scope.c1;
         }
 
-        ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, $scope.ambientTemperature, $scope.conductorsRange);
+        ampacity.setInputData($scope.wireMaterial, $scope.conductorType, $scope.continousCurrent, $scope.nonContinousCurrent, $scope.terminalTemp, ampacity.getAmbientTempsByRange($scope.ambientTemperature), ampacity.getConductorsRangesByValue($scope.conductorsRange));
         var wireSize;
         
         if($scope.c2>=250){

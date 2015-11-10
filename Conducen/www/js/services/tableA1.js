@@ -81,7 +81,7 @@ angular.module('app')
         "copper_60":"2",
         "copper_75":"3",
         "aluminum_conductors":1,
-        "aluminum_60":"1/0",
+        "aluminum_60":"",
         "aluminum_75":"2"
       },
       {
@@ -90,7 +90,7 @@ angular.module('app')
         "copper_60":"1",
         "copper_75":"3",
         "aluminum_conductors":1,
-        "aluminum_60":"1/0",
+        "aluminum_60":"",
         "aluminum_75":"1"
       },
       {
@@ -297,6 +297,15 @@ angular.module('app')
         "copper_60":"",
         "copper_75":"400",
         "aluminum_conductors":16,
+        "aluminum_60":"",
+        "aluminum_75":"500"
+      },
+      {
+        "cb":6000,
+        "copper_conductors":18,
+        "copper_60":"",
+        "copper_75":"400",
+        "aluminum_conductors":19,
         "aluminum_60":"",
         "aluminum_75":"500"
       }

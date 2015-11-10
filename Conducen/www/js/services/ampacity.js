@@ -106,13 +106,15 @@ angular.module('app')
 	        ];
 	    },
 
-	    getConductorTa: function(conductor, array){
+	    getConductorTa: function(conductor){
 	    	var result = null;
+	    	var array = this.getConductorTypes();
 
 	    	for (var i = 0; i < array.length; i++) {
 	    		var item = array[i];
-	    		if(item.tc = "conductor"){
+	    		if(item.tc == conductor){
 	    			result  = item.ta;
+	    			return result;
 	    		}
 	    	}
 
@@ -138,12 +140,12 @@ angular.module('app')
 			        {
 			          "name" : "60˚ C",
 			          "id" : "1",
-			          "type" : "60"
+			          "value" : "60"
 			        },
 			        {
 			          "name" : "75˚ C",
 			          "id" : "2",
-			          "type" : "75"
+			          "value" : "75"
 			        }
 		        ];
 		    }
@@ -155,32 +157,32 @@ angular.module('app')
 			        {
 			          "name" : "69-77˚ F",
 			          "id" : "1",
-			          "type" : "69-77"
+			          "type" : "21-25"
 			        },
 			        {
 			          "name" : "78-86˚ F",
 			          "id" : "2",
-			          "type" : "78-86"
+			          "type" : "26-30"
 			        },
 			        {
 			          "name" : "87-95˚ F",
 			          "id" : "3",
-			          "type" : "87-95"
+			          "type" : "31-35"
 			        },
 			        {
 			          "name" : "96-104˚ F",
 			          "id" : "4",
-			          "type" : "96-104"
+			          "type" : "36-40"
 			        },
 			        {
 			          "name" : "105-113˚ F",
 			          "id" : "5",
-			          "type" : "105-113"
+			          "type" : "41-45"
 			        },
 			        {
 			          "name" : "114-122˚ F",
 			          "id" : "6",
-			          "type" : "114-122"
+			          "type" : "46-50"
 			        }
 		        ];
 		    }else{
@@ -219,6 +221,17 @@ angular.module('app')
 		    }
 	    },
 
+	    getAmbientTempsByRange: function(range){
+
+	    	var temps = this.getAmbientTemps();
+
+			for (var i = 0; i < temps.length; i++) {
+				if (temps[i].type == range) {
+					return temps[i].name;
+				}	
+			}
+	    },
+
 	    getConductorsRanges: function(){
 	    	if ($translate.use()=="en") {
 		        return [
@@ -238,14 +251,30 @@ angular.module('app')
 			        {
 			          "name" : "no más de 3",
 			          "id" : "1",
-			          "type" : "1.00"
+			          "value" : "1.00"
 			        },
 			        {
 			          "name" : "4",
 			          "id" : "2",
-			          "type" : "0.8"
+			          "value" : "0.8"
 			        }
 		        ];
+		    }
+	    },
+
+	    getConductorsRangesByValue: function(value){
+	    	if ($translate.use()=="en") {
+	    		if(value==1.00){
+	    			return "3 or less";
+	    		}else{
+	    			return "4";
+	    		}
+		    }else{
+		    	if(value==1.00){
+	    			return "no más de 3";
+	    		}else{
+	    			return "4";
+	    		}
 		    }
 	    },
 
@@ -264,7 +293,7 @@ angular.module('app')
 			var conductors = -1;
 			var size = -1;
 
-			if(material == "aluminum" && ac > 100 && tt == 60){
+			if(material == "aluminum" && ac > 80 && tt == 60){
 				return -2;
 			}else{
 				if(material == "copper" && ac > 125 && tt == 60){
@@ -333,13 +362,34 @@ angular.module('app')
 
 		    			result = { 
 		    				"c2" : item.size,
-		    				"ata" : item[key]
+		    				"ata" : item[key],
+		    				"index" : i
 		    			};
 
 		    			return result;
 		    		}
 		    	}
 			};
+
+			return result;
+		},
+
+		getC2ByIndex: function(material, ta, index){
+			var result = -1;
+			var key = material + "_" + ta;
+
+			var item = tableA4.data[index];
+
+			if(item[key]!=""){
+
+    			result = { 
+    				"c2" : item.size,
+    				"ata" : item[key],
+    				"index" : index
+    			};
+
+    			return result;
+	    	}
 
 			return result;
 		},

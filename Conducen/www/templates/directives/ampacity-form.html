@@ -39,7 +39,7 @@
 			      {{"terminal_temp_label" | translate}}
 			    </div>
 			    <select ng-model="terminalTemp">
-			      <option ng-repeat="terminalTemp in terminalTemps" value="{{terminalTemp.type}}">{{terminalTemp.name | uppercase}}</option>
+			      <option ng-repeat="terminalTemp in terminalTemps" value="{{terminalTemp.value}}">{{terminalTemp.name | uppercase}}</option>
 			    </select>
 			 </label>
 		</div>
@@ -59,7 +59,7 @@
 			      {{"current_conductors_label" | translate}}
 			    </div>
 			    <select ng-model="conductorsRange">
-			      <option ng-repeat="conductorsRange in conductorsRanges" value="{{conductorsRange.type}}">{{conductorsRange.name | uppercase}}</option>
+			      <option ng-repeat="conductorsRange in conductorsRanges" value="{{conductorsRange.value}}">{{conductorsRange.name | uppercase}}</option>
 			    </select>
 			 </label>
 		</div>

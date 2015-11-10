@@ -7,7 +7,12 @@ angular.module('app')
     },
     controller: function($scope, $rootScope, $state, $translate, $ionicScrollDelegate) {
 
+      $scope.initialized = false;
+
       $scope.init = function(){
+
+        $scope.initialized = true;
+
           //Conductor materials
         $scope.conductorMaterials = voltageDrop.getConductorMaterials();
 
@@ -27,11 +32,24 @@ angular.module('app')
         $scope.clear();
 
         //Pull again all the field info after a change of language option
-        $rootScope.$on('$stateChangeSuccess', 
+        var listener = $rootScope.$on('$stateChangeSuccess', 
           function(event, toState, toParams, fromState, fromParams){
-            if (toState.name == "voltage-drop") {
-              $scope.init();
-            };
+
+            if(fromParams.id == "voltage-drop" && fromState.name == "results" && toState.name == "voltage-drop"){
+              if ($scope.initialized == false) {
+                // console.log("Must fill with results data");
+              }
+
+            }else{
+              if(fromState.name == "voltage-drop" && toState.name == "results"){
+                // console.log("Not Clean");
+              }else{
+                // console.log("Must Clean");
+                $scope.clear();
+                $scope.initialized = false;
+              }
+            }
+
           });
       }
 

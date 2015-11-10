@@ -127,7 +127,8 @@
 
               <h6 class="item-label">{{"terminal_temp_short_label" | translate}}</h6>
               <h6 class="item-label">{{"ambient_temperature_short_label" | translate}}</h6>
-              <p class="item-data">{{ampacityInputData.terminalTemp}}</p>
+              <p class="item-data" ng-if="isLanguage('en')">{{ampacityInputData.terminalTemp * 1.8 + 32}}</p>
+              <p class="item-data" ng-if="isLanguage('es')">{{ampacityInputData.terminalTemp}}</p>
               <p class="item-data">{{ampacityInputData.ambientTemperature}}</p>
 
               <h6 class="item-label lone-item">{{"current_conductors_short_label" | translate}}</h6>
@@ -146,11 +147,11 @@
             <p class="item-data no-border no-uppercase">{{ampacityResult.cb}} A</p>
           </div>
           <div class="item">
-            <h6 class="item-label">{{ampacityResult.c_label}}</h6>
+            <h6 class="item-label">{{"c_label" | translate}}</h6>
             <p class="item-data no-border no-uppercase">{{ampacityResult.c}}</p>
           </div>
           <div class="item">
-            <h6 class="item-label">{{ampacityResult.c_num_label}}</h6>
+            <h6 class="item-label">{{"cNum_label" | translate}}</h6>
             <p class="item-data no-border no-uppercase">{{ampacityResult.c_num}}</p>
           </div>
         </div>

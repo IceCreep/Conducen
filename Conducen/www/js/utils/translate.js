@@ -101,25 +101,27 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             ohm_distance_unit: "ohms per 1000 feet",
             clear_label: "Clear input data",
             //Ampacity
-            ampacity_instruction_1: "Please select or enter the following inputs",
+            ampacity_instruction_1: "To Calculate the Wire Size, please select or enter the following inputs:",
             wire_material_label: "Wire Material",
             wire_material_short_label: "Wire Material",
             conductor_type_label: "Conductor Type",
             conductor_type_short_label: "Conductor Type",
-            continuos_current_label: "Continous Loads Current",
+            continuos_current_label: "Continous Loads Current (A)",
             continuos_current_short_label: "Continous Loads Current",
-            non_continuos_current_label: "Non Continous Loads Current",
+            non_continuos_current_label: "Non Continous Loads Current (A) ",
             non_continuos_current_short_label: "Non Continous Loads Current",
-            terminal_temp_label: "Terminal Temperature",
+            terminal_temp_label: "Terminal Temperature (°C)",
             terminal_temp_short_label: "Terminal Temperature",
-            ambient_temperature_label: "Ambient Temperature",
+            ambient_temperature_label: "Ambient Temperature (°C)",
             ambient_temperature_short_label: "Ambient Temperature",
-            current_conductors_label: "Current-Carrying Conductors",
-            current_conductors_short_label: "Current-Carrying Conductors",
+            current_conductors_label: "Charged group",
+            current_conductors_short_label: "Charged group",
             cb_error_label: "No aplica para 60°C temperatura terminal",
             ampacity_error_1_label: "Please make sure you have entered all the needed data before continuing.",
-            ampacity_results: "Ampacity Results",
-            cb_label: "CB"
+            ampacity_results: "Results",
+            cb_label: "Circuit Breaker",
+            c_label: "Wire Size",
+            cNum_label: "Parallel Conductors"
         });
         $translateProvider.translations('es', {
             choose_language_label: "Elige el lenguaje",
@@ -221,7 +223,29 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             voltage_drop_error_5_label: "Por favor asegurese de que el valor para el factor de power se encuentra entre 0 y 1.",
             voltage_drop_error_6_label: "El tamaño del conductor es mayor que 1000 kcmil, no usar el resultado.",
             ohm_distance_unit: "ohmios/km al neutro",
-            clear_label: "Borrar datos de entrada"
+            clear_label: "Borrar datos de entrada",
+            //Ampacity
+            ampacity_instruction_1: "Para Calcular el Calibre del Conductor por favor seleccione o ingrese los siguientes datos:",
+            wire_material_label: "Metal del Conductor",
+            wire_material_short_label: "Metal del Conductor",
+            conductor_type_label: "Tipo de Conductor",
+            conductor_type_short_label: "Tipo de Conductor",
+            continuos_current_label: "Corriente Continua (A)",
+            continuos_current_short_label: "Corriente Continua",
+            non_continuos_current_label: "Corriente No Continua (A)",
+            non_continuos_current_short_label: "Corriente No Continua",
+            terminal_temp_label: "Temperatura del Terminal (°C)",
+            terminal_temp_short_label: "Temperatura del Terminal",
+            ambient_temperature_label: "Rango Temperatura Ambiente (°C)",
+            ambient_temperature_short_label: "Temperatura Ambiente",
+            current_conductors_label: "Grupo Cargado",
+            current_conductors_short_label: "Grupo Cargado",
+            cb_error_label: "No aplica para 60°C temperatura terminal",
+            ampacity_error_1_label: "Por favor asegurese de haber introduditos todos los datos necesarios para poder continuar.",
+            ampacity_results: "Resultados",
+            cb_label: "Interruptor Automático",
+            c_label: "Calibre Conductor",
+            cNum_label: "Conductores en Paralelo"
         });
         $translateProvider.preferredLanguage("es");
         $translateProvider.fallbackLanguage("en");
