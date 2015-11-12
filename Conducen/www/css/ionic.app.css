@@ -7934,6 +7934,12 @@ form {
     .secondary-page .header img {
       width: 25%;
       float: left; }
+    .secondary-page .header .icon {
+      float: left;
+      color: #009e49;
+      font-size: 6em;
+      margin-right: 20px;
+      text-shadow: 2px 2px 5px #888888; }
     .secondary-page .header h1 {
       float: left;
       width: 75%;
@@ -7972,6 +7978,8 @@ form {
           color: #6d6e76;
           font-size: 14px;
           font-family: "RobotoRegular", Verdana, Arial; }
+          .secondary-page .results .input-data .data-container .item .item-label.lone-item {
+            width: 100%; }
         .secondary-page .results .input-data .data-container .item .item-data {
           float: left;
           width: 30%;
@@ -7982,6 +7990,8 @@ form {
           font-size: 14px;
           font-family: "RobotoRegular", Verdana, Arial;
           text-transform: uppercase; }
+          .secondary-page .results .input-data .data-container .item .item-data.lone-item {
+            width: 100%; }
         .secondary-page .results .input-data .data-container .item.data-row .item-label {
           width: 50%;
           padding-left: 5px;
@@ -8133,3 +8143,13 @@ form .conductors-container {
         margin-left: 5%;
         margin-top: 10px;
         display: inline-block; }
+
+.help h2 {
+  width: 80%;
+  margin: 20px auto; }
+.help ol li {
+  width: 80%;
+  margin: 20px auto; }
+.help p {
+  width: 80%;
+  margin: 20px auto; }

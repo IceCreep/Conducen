@@ -15,6 +15,7 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             conductor_label : "Conductor",
             conduit_label : "Conduit",
             length_label : "Length",
+            help_label : "Help",
             //Conduit Fill
             conductors_label: "Conductors",
             wires_label: "Wires",
@@ -136,6 +137,7 @@ angular.module('translate', ['ionic', 'pascalprecht.translate'])
             conductor_label : "Conductor",
             conduit_label : "Conduit",
             length_label : "Distancia",
+            help_label : "Ayuda",
             //Conduit Fill
             calculator_label: "Calculadora",
             area_units: "mm",

@@ -62,6 +62,12 @@ angular.module('app', ['ionic', 'translate', 'app.controllers', 'ngAnimate'])
     controller: 'VoltageDropCtrl'
   })
 
+  .state('help', {
+    url: "/help",
+    templateUrl: "templates/help.html",
+    controller: 'HelpCtrl'
+  })
+
   .state('app.search', {
     url: "/search",
     views: {
