@@ -211,6 +211,16 @@ form{
 		border-radius: 5px;
 	}
 
+	.longer-label{
+		.input-label{
+			width: 50%;
+		}
+
+		select{
+			width: 50%;
+		}
+	}
+
 	.form-item{
 		margin-top: 15px;
 		font-family: "RobotoRegular", Verdana, Arial;

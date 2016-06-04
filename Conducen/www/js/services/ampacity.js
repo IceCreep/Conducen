@@ -36,6 +36,18 @@ angular.module('app')
 		    }
 	    },
 
+	    getMaterialByName: function(material){
+	    	if ($translate.use()=="es") {
+	    		if(material == "copper"){
+	    			return "Cobre";
+	    		}else{
+	    			return "Aluminio";
+	    		}
+		    }else{
+		    	return material;
+		    }
+	    },
+
 	    getConductorTypes: function(){
 	        return [
 		        {
@@ -293,14 +305,6 @@ angular.module('app')
 			var conductors = -1;
 			var size = -1;
 
-			if(material == "aluminum" && ac > 80 && tt == 60){
-				return -2;
-			}else{
-				if(material == "copper" && ac > 125 && tt == 60){
-					return -2;
-				}
-			}
-
 			for (var i = 0; i < tableA1.data.length; i++) {
 				if(cb < 0){
 		    		item = tableA1.data[i];
@@ -433,7 +437,7 @@ angular.module('app')
 
 	    setInputData: function(wireMaterial, conductorType, continousCurrent, nonContinousCurrent, terminalTemp, ambientTemperature, conductorsRange){
 	    	inputData = {
-	    		"wireMaterial" : wireMaterial,
+	    		"wireMaterial" : this.getMaterialByName(wireMaterial),
 	    		"conductorType" : conductorType,
 	    		"continousCurrent" : continousCurrent,
 	    		"nonContinousCurrent" : nonContinousCurrent,

@@ -45,7 +45,7 @@ angular.module('app')
                 // console.log("Not Clean");
               }else{
                 // console.log("Must Clean");
-                $scope.clear();
+                $scope.init();
                 $scope.initialized = false;
               }
             }

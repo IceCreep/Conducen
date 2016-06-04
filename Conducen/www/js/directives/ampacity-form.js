@@ -41,7 +41,7 @@ angular.module('app')
                 // console.log("Not Clean");
               }else{
                 // console.log("Must Clean");
-                $scope.clear();
+                $scope.init();
                 $scope.initialized = false;
               }
             }
@@ -73,6 +73,7 @@ angular.module('app')
         $scope.showCBError = false;
         $scope.showResultsWarning = false;
         $scope.showInputError = false;
+        $scope.showTTError = false;
 
         $scope.ac = null;
         $scope.cb = null;
@@ -97,11 +98,11 @@ angular.module('app')
       $scope.calculate = function(){
 
         //For testing
-        // $scope.wireMaterial = "copper";
+        // $scope.wireMaterial = "aluminum";
         // $scope.conductorType = "thhn";
-        // $scope.continousCurrent = 400;
-        // $scope.nonContinousCurrent = 110;
-        // $scope.terminalTemp = 75;
+        // $scope.continousCurrent = 0;
+        // $scope.nonContinousCurrent = 70;
+        // $scope.terminalTemp = 60;
         // $scope.ambientTemperature = "36-40";
         // $scope.conductorsRange = 0.80;
 
@@ -111,7 +112,7 @@ angular.module('app')
         // $scope.nonContinousCurrent = 1000;
         // $scope.terminalTemp = 75;
         // $scope.ambientTemperature = "21-25";
-        // $scope.conductorsRange = 1.0;
+        // $scope.conductorsRange = 0.8;
 
         if ($scope.wireMaterial == null ||
           $scope.conductorType == null ||
@@ -127,10 +128,17 @@ angular.module('app')
           $scope.showInputError = false;
         }
 
+        if($scope.conductorType === "tw" && $scope.terminalTemp == 75){
+          $scope.showTTError = true;
+          return;
+        }else{
+          $scope.showTTError = false;
+        }
+
         $scope.ac = ampacity.getAC($scope.continousCurrent, $scope.nonContinousCurrent);
         console.log("AC " + $scope.ac);
 
-        var cbResult = $scope.calculateCB($scope.ac);
+        var cbResult = $scope.calculateCB($scope.ac, true);
         if(cbResult.cb == null){
           return;
         }
@@ -154,13 +162,13 @@ angular.module('app')
             if($scope.c1>=250){
               wireSize = $scope.c1 + " kcmil";
             }else{
-              wireSize = $scope.c1 + " AMG";
+              wireSize = $scope.c1 + " AWG";
             }
 
             ampacity.setResultData({
               "cb" : $scope.cb,
               "c_label" : "C1",
-              "c" : $scope.c1,
+              "c" : wireSize,
               "c_num_label" : "#C1",
               "c_num" : $scope.c1Num 
             });
@@ -189,7 +197,8 @@ angular.module('app')
           $scope.c2 = c2Result.c2;
           $scope.ata = c2Result.ata;
 
-          $scope.goToCompareC2();
+          // $scope.goToCompareC2();
+          $scope.goToPhaseD();
 
         }else{
 
@@ -228,7 +237,7 @@ angular.module('app')
             $scope.acu = Math.ceil($scope.ata * $scope.ft);
             console.log("Phase B ACU " + $scope.acu);
 
-            var cbResult = $scope.calculateCB($scope.acu);
+            var cbResult = $scope.calculateCB($scope.acu, false);
             if(cbResult.cb == null){
               return;
             }
@@ -246,11 +255,24 @@ angular.module('app')
 
           isCycling = false;
 
-          $scope.goToCompareC2();
+          $scope.goToPhaseD();
         }
       }
 
-      $scope.calculateCB = function(relativeParameter){
+      $scope.calculateCB = function(relativeParameter, isLimited){
+
+        if(isLimited){
+          if($scope.wireMaterial == "aluminum" && relativeParameter > 80 && $scope.terminalTemp == 60){
+            $scope.showCBError = true;
+            return -2;
+          }else{
+            if($scope.wireMaterial == "copper" && relativeParameter > 100 && $scope.terminalTemp == 60){
+              $scope.showCBError = true;
+              return -2;
+            }
+          }
+        }
+
         var cb = ampacity.getCB(relativeParameter, $scope.wireMaterial, $scope.terminalTemp);
 
         //FC errors
@@ -306,7 +328,7 @@ angular.module('app')
         if($scope.c3>=250){
           wireSize = $scope.c3 + " kcmil";
         }else{
-          wireSize = $scope.c3 + " AMG";
+          wireSize = $scope.c3 + " AWG";
         }
 
         ampacity.setResultData({
@@ -335,7 +357,7 @@ angular.module('app')
         if($scope.c2>=250){
           wireSize = $scope.c2 + " kcmil";
         }else{
-          wireSize = $scope.c2 + " AMG";
+          wireSize = $scope.c2 + " AWG";
         }
 
         ampacity.setResultData({

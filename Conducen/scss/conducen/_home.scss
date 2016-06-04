@@ -78,16 +78,45 @@
 		}
 	}
 
+	.help{
+		margin: 0;
+		color: #065733;
+		box-shadow: 0px 0px 22px -7px #065733 inset;
+		border: 1px solid #666666;
+
+		>div{
+			width: 100px;
+			margin: 0 auto;
+			vertical-align: middle;
+		}
+
+		img{
+			width: 30px;
+			float: left;
+		}
+
+		h2{
+			float: left;
+			text-transform: uppercase;
+			font-size: 13px;
+			font-weight: bold;
+			margin: 8px 0 0 0;
+			width: auto;
+			padding-left: 10px;
+		}
+	}
+
 	.copyright{
 		display: block;
 		height: 45px;
 		vertical-align: middle;
 		line-height: 45px;
 
-		p{
+		p, a{
 			color: white;
 			text-align: center;
 			margin-bottom: 0;
+			font-family: 'DINOT-Medium', "RobotoCondensedRegular", Verdana;
 		}
 	}
 }
